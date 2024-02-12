@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<style>
+.textstroke{
+    color: #2D4059;
+    -webkit-text-stroke: 2px white;
+    font-size: 50px;
+    font-weight: bold;
+}
+.btn-color{
+    background-color: #FFD460;
+    border: 13px solid #EA5455;
+    border-radius: 40px;
+}
+.inp-color{
+    background-color: white;
+    border: 13px solid #EA5455;
+    border-radius: 40px;
+}
+.child{
+    height: 100vh;
+}
+.game-grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 30px;
+}
+.border-check{
+    border: 2px solid red;
+}
+</style>
+
+<body style="background-color: #2D4059;">
+            <div class="container mx-auto game-grid justify-center items-center">
+                <div class="child flex justify-center items-center">
+                    <div>
+                        <div class="p-14 h-32 mb-8 flex justify-center items-center btn-color">
+                            <span style="font-size: 60px; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span id="turn-number">1</span></span>
+                        </div>
+
+                        <div class="p-4 h-32 flex justify-center items-center btn-color">
+                            <span id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> -1 : <span style="font-size: 60px;">X</span></span>
+                        </div>
+
+                        <img class="mt-6 mb-6" src="/asset/sep_line_gamepage.png">
+
+                        <div class="p-4 h-32 flex justify-center items-center btn-color">
+                            <span id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> -2 : <span style="font-size: 60px;">O</span></span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="child flex justify-center items-center">
+                    <div class="btn-color" style="height: 600px; width: 600px;">
+                        <!-- insert OX table here -->
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="child flex justify-center items-center">
+                    <div>
+                        <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color">
+                            <span class="textstroke">Room Code<br>
+                                <span style="font-size: 70px;" id="Roomcode-number">######</span>
+                            </span>
+                        </div>
+
+                        <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color">
+                            <div class="textstroke">
+                                <span>PEMDAS</span><br>
+                                <span>is coming in</span><br>
+                                <div style="font-size: 80px;">
+                                    <span id="game-timer">5</span><span> secs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-96 h-32 mt-4 flex justify-center items-center btn-color"
+
+                        onclick="">
+                        <!-- insert function here -->
+                            <span style="font-size: 40px;" class="textstroke">BACK TO MENU</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+</body>
+<script src="SignIn.js"></script>
+</html>
+
