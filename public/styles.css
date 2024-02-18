@@ -1,0 +1,24 @@
+.textstroke {
+    color: #2D4059;
+    -webkit-text-stroke: 2px white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.btn-color {
+    background-color: #FFD460;
+    border: 13px solid #EA5455;
+    border-radius: 40px;
+}
+
+.inp-color {
+    background-color: white;
+    border: 13px solid #EA5455;
+    border-radius: 40px;
+}
+
+.round-btn {
+    background-color: #FFD460;
+    border: 13px solid #EA5455;
+    border-radius: 80px;
+}
