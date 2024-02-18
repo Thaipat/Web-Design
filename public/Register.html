@@ -22,7 +22,7 @@
         <div class="p-14 h-32 flex justify-center mt-16 items-center btn-color">
             <span class="textstroke">PEMDAS TIC TAC TOE</span>
         </div>
-        <button class="absolute w-32 h-32 mt-8 ml-8 flex justify-center items-center round-btn" style="left: 0;"
+        <button class="absolute w-28 h-28 mt-8 ml-8 flex justify-center items-center round-btn" style="left: 0;"
             onclick="location.href = 'SignIn.html'">
             <!-- insert function here -->
 
@@ -34,12 +34,18 @@
     <!-- input here -->
     <div class="container mx-auto flex justify-center">
         <div>
-            <input id="register_id" style="font-size: 35px;" class="inp-color mt-12 h-20 w-96 pl-4" type="text"
-                placeholder="Username"><br>
-            <input id="register_password" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4" type="password"
-                placeholder="Password"><br>
-            <input id="register_Cpassword" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4"
-                type="password" placeholder="Confirm Password">
+            <input id="register_id" style="font-size: 35px;" class="inp-color mt-12 h-20 w-96 pl-4" type="text" placeholder="Username"><br>
+            <div id="confirmpassword-feedback" class="invalid-feedback flex items-center p-0 m-0">
+                <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+                <span class="feedback-text-color">Username is already use</span>
+            </div>
+            <input id="register_password" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4" type="password" placeholder="Password"><br>
+            <input id="register_Cpassword" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4" type="password" placeholder="Confirm Password">
+            <!-- feedback -->
+            <div id="confirmpassword-feedback" class="invalid-feedback flex items-center p-0 m-0">
+                <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+                <span class="feedback-text-color">Confirm password is not match</span>
+            </div>
         </div>
     </div>
 
