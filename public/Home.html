@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 </head>
 
 <style>
-.textstroke{
-    color: #2D4059;
-    -webkit-text-stroke: 1.5px white;
-    font-size: 50px;
-    font-weight: bold;
-}
-.exit-btn{
-    width:80px;
-    height: 80px;
-    right: -50px;
-    top:0;
-    background-color: #EA5455;
-    border:5px solid #EA5455;
-    border-radius: 100px;
-    font-size: 50px;
-    color: white;
-}
-.btn-color{
-    background-color: #FFD460;
-    border: 13px solid #EA5455;
-    border-radius: 40px;
-}
-.inp-color{
-    background-color: white;
-    border: 13px solid #EA5455;
-    border-radius: 40px;
-}
-.ent-color{
-    background-color: white;
-    border: 8px solid #EA5455;
-    border-radius: 40px;
-}
+    .textstroke {
+        color: #2D4059;
+        -webkit-text-stroke: 1.5px white;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .exit-btn {
+        width: 80px;
+        height: 80px;
+        right: -50px;
+        top: 0;
+        background-color: #EA5455;
+        border: 5px solid #EA5455;
+        border-radius: 100px;
+        font-size: 50px;
+        color: white;
+    }
+
+    .btn-color {
+        background-color: #FFD460;
+        border: 13px solid #EA5455;
+        border-radius: 40px;
+    }
+
+    .inp-color {
+        background-color: white;
+        border: 13px solid #EA5455;
+        border-radius: 40px;
+    }
+
+    .ent-color {
+        background-color: white;
+        border: 8px solid #EA5455;
+        border-radius: 40px;
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -84,16 +92,12 @@
                 <!-- button here -->
                 <div class="container mx-auto justify-center flex">
                     <div>
-                        <button class="w-96 h-32 mt-12 flex justify-center items-center btn-color"
-
-                        onclick="">
-                        <!-- insert function here -->
+                        <button class="w-96 h-32 mt-12 flex justify-center items-center btn-color" onclick="">
+                            <!-- insert function here -->
                             <span class="textstroke">JOIN ROOM</span>
                         </button>
-                        <button class="w-96 h-32 mt-8 flex justify-center items-center btn-color"
-
-                        onclick="">
-                        <!-- insert function here -->
+                        <button class="w-96 h-32 mt-8 flex justify-center items-center btn-color" onclick="">
+                            <!-- insert function here -->
                             <span class="textstroke">CREATE ROOM</span>
                         </button>
                     </div>
@@ -101,16 +105,12 @@
 
 
                 <div class="container mx-auto justify-center flex">
-                    <button class="w-44 h-32 mt-8 mr-4 flex justify-center items-center btn-color"
-
-                    onclick="">
+                    <button class="w-44 h-32 mt-8 mr-4 flex justify-center items-center btn-color" onclick="">
                         <!-- insert function here -->
 
                         <img style="scale: 1;" src="/asset/icon_Trophy.png">
                     </button>
-                    <button class="w-44 h-32 mt-8 ml-4 flex justify-center items-center btn-color"
-
-                    onclick="">
+                    <button class="w-44 h-32 mt-8 ml-4 flex justify-center items-center btn-color" onclick="">
                         <!-- insert function here -->
 
                         <img style="scale: 1;" src="/asset/icon-Exit.png">
@@ -120,8 +120,21 @@
         </div>
 
     </div>
-
+    <script>
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBmhLAK8_wtsIdzYLH_jO4MZ_Go6KMFuZk",
+            authDomain: "pemdas-project.firebaseapp.com",
+            databaseURL: "https://pemdas-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pemdas-project",
+            storageBucket: "pemdas-project.appspot.com",
+            messagingSenderId: "74864832293",
+            appId: "1:74864832293:web:98438b097b3c0c6e10f4cc",
+            measurementId: "G-T0B2LYTNVF"
+        };
+        firebase.initializeApp(firebaseConfig)
+    </script>
+    <script src="Home.js"></script>
 </body>
-<script src="Home.js"></script>
-</html>
 
+</html>
