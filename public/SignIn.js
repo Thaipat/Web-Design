@@ -58,6 +58,8 @@ function signupAccount() {
             var username = data.val().username;
 
             if (currentUsername == "") {
+                document.querySelector("#register_password").value = ""
+                document.querySelector("#register_Cpassword").value = ""
                 document.querySelector("#signup-username-feedback").innerHTML = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Username cannot be empty</span>`
                 usernameValid = false
