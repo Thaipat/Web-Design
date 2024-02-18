@@ -13,7 +13,19 @@
 </head>
 
 <style>
-
+    .btn-height{
+        height: 13vh;
+    }
+    .tutorial-textbox{
+        background-color: white;
+        border-radius: 20px;
+        font-size: 2vw;
+        width: 50vw;
+    }
+    .tutorial-btn{
+        width: 10vw;
+        height: 10vh;
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -27,17 +39,17 @@
 
             <!-- pop up Join Room here -->
             <!-- uncomment to check pop up -->
-            
+
             <div class="absolute flex justify-center items-center" id="join-room">
                 <!-- <div class="absolute flex justify-center items-center z-10"
                     style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
                     <div class="p-14 flex justify-center items-center btn-color" style="width: 800px; height: 275px;">
                         <div class="relative w-auto h-auto text-center">
-    
+
                             <button id="exit_btn"
                                 class="absolute exit-btn flex justify-center items-center text-center pb-3" onclick="closeJoinRoom()"> x
                             </button>
-    
+
                             <div class="textstroke">Join Room</div>
                             <div id="roomcode" style="font-size: 50px; width: auto; height: 120px;"
                                 class="flex inp-color mt-4 pl-4 pr-4 text-left items-center">
@@ -51,12 +63,45 @@
                 </div> -->
             </div>
 
+            <div class="absolute flex justify-center items-center" id="tutorial">
+                <!-- <div class="relative flex justify-center items-center z-10"
+                    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+                    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+                        <div class="text-center">
+                            <div class="flex justify-center mt-4">
+                                <img style="width: 70%;" src="https://media.discordapp.net/attachments/986985862631915541/1208889574634422272/tutorial-1.png?ex=65e4ed26&is=65d27826&hm=4e44f56600bc37478b7ae1d57a9d2be2e25541ed7e1eac945b3c355c81da1d68&=&format=webp&quality=lossless&width=1191&height=670">
+                            </div>
+                            <div class="relative flex justify-center">
+                                <div class="tutorial-textbox mt-4 p-3">
+                                    <span>โจทย์ Pemdas กำลังจะมาใน 5 วินาที เตรียมตัว!!</span>
+                                </div>
+                            </div>
+                            <div class="relative flex justify-center items-center m-4">
+                                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="">
+                                    <span class="textstroke" style="font-size: 35px;">close</span>
+                                </button>
+                                <div class="tutorial-btn flex justify-center items-center btn-color"
+                                style="margin-left: 10vw; margin-right: 10vw;">
+                                    <span class="textstroke" style="font-size: 35px;">
+                                        <span id="tutorial-page">1</span>/6
+                                    </span>
+                                </div>
+                                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="">
+                                    <span class="textstroke relative" style="font-size: 35px;">next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+
 
 
             <div>
                 <!-- game title here -->
                 <div class="container mx-auto flex justify-center">
-                    <div class="p-14 h-32 flex justify-center items-center btn-color">
+                    <div class="p-14 flex justify-center items-center btn-color" style="height: 15vh;">
                         <span class="textstroke">PEMDAS TIC TAC TOE</span>
                     </div>
                 </div>
@@ -65,11 +110,11 @@
                 <!-- button here -->
                 <div class="container mx-auto justify-center flex">
                     <div>
-                        <button class="w-96 h-24 mt-12 flex justify-center items-center btn-color" onclick="joinRoom()">
+                        <button class="w-96 btn-height mt-12 flex justify-center items-center btn-color" onclick="joinRoom()">
                             <!-- insert function here -->
                             <span class="textstroke" style="font-size: 35px;">JOIN ROOM</span>
                         </button>
-                        <button class="w-96 h-24 mt-8 flex justify-center items-center btn-color" onclick="">
+                        <button class="w-96 btn-height mt-8 flex justify-center items-center btn-color" onclick="">
                             <!-- insert function here -->
                             <span class="textstroke" style="font-size: 35px;">CREATE ROOM</span>
                         </button>
@@ -78,13 +123,13 @@
 
 
                 <div class="container mx-auto justify-center flex">
-                    <button class="w-44 h-24 mt-8 mr-4 flex justify-center items-center btn-color" onclick="">
+                    <button class="w-44 btn-height mt-8 mr-4 flex justify-center items-center btn-color" onclick="">
                         <!-- insert function here -->
 
                         <img style="scale: 0.7;"
                             src="https://media.discordapp.net/attachments/986985862631915541/1208823235706232893/icon_Trophy.png?ex=65e4af5e&is=65d23a5e&hm=5bfba419c812f46978074d714ff4ef0fd99f7c7be73e5df215d763aa64185e7a&=&format=webp&quality=lossless&width=102&height=87">
                     </button>
-                    <button class="w-44 h-24 mt-8 ml-4 flex justify-center items-center btn-color"
+                    <button class="w-44 btn-height mt-8 ml-4 flex justify-center items-center btn-color"
                         onclick="location.href = 'SignIn.html'">
                         <!-- insert function here -->
 
