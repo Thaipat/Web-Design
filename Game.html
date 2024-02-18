@@ -35,6 +35,31 @@
 .border-check{
     border: 2px solid red;
 }
+.td {
+    border: 13px solid #EA5455;
+    height: 113px;
+    width: 113px;
+    align-items: center;
+    }
+.game-board
+{
+	width: 576px;
+	height: 576px;
+	margin: 0 auto;
+    color: #fff;
+    border-radius: 10px;
+	display: grid;
+	grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+}
+
+.box
+{
+  border: 6.5px solid #EA5455;
+  font-size: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
 <body style="background-color: #2D4059;">
@@ -63,15 +88,73 @@
                     <div class="btn-color" style="height: 600px; width: 600px;">
                         <!-- insert OX table here -->
 
+                        <!-- table with tr -->
+                        <!-- <table>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
 
-
-
-
-
-
-
-
-
+                            <!-- table with grid -->
+                            <div class="game-board">
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                            </div>
+                        </table>
                     </div>
                 </div>
 
