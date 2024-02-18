@@ -1,8 +1,5 @@
 const accountRef = firebase.database().ref("Account")
 
-let signinForm = document.querySelector("#login_btn")
-signinForm.addEventListener("click", signinAccount)
-
 function signinAccount() {
     accountRef.once("value").then((snapshot) => {
         snapshot.forEach(function (data) {
@@ -15,7 +12,7 @@ function signinAccount() {
 
             if (currentUsername == username) {
                 console.log("Username valid")
-                if(password == currentPassword){
+                if (password == currentPassword) {
                     console.log("Password valid")
                     document.location.href = "Home.html";
                 }
@@ -24,10 +21,16 @@ function signinAccount() {
     })
 }
 
-let getList = (user) => {
-    if (user) {
-        userListRef.child(user.uid).on("value", (snapshot) => {
-            signinAccount(snapshot);
+function signupAccount() {
+    let username = document.querySelector("#register_id").value
+    let password = document.querySelector("#register_password").value
+    let confirmPassword = document.querySelector("#register_Cpassword").value
+
+    if(password == confirmPassword){
+        accountRef.push({
+            username: username,
+            password: password,
         })
+        document.location.href = "SignIn.html"
     }
 }
