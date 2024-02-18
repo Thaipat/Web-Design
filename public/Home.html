@@ -13,22 +13,7 @@
 </head>
 
 <style>
-    .exit-btn {
-        width: 80px;
-        height: 80px;
-        right: -50px;
-        top: 0;
-        background-color: #EA5455;
-        border: 5px solid #EA5455;
-        border-radius: 100px;
-        font-size: 50px;
-        color: white;
-    }
-    .ent-color {
-        background-color: white;
-        border: 8px solid #EA5455;
-        border-radius: 40px;
-    }
+
 </style>
 
 <body style="background-color: #2D4059;">
@@ -37,7 +22,7 @@
 
     <div class="flex justify-center items-center" style="width: 100vw; height: 100vh;">
 
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center ">
 
 
             <!-- pop up Join Room here -->
@@ -64,7 +49,7 @@
             <div>
                 <!-- game title here -->
                 <div class="container mx-auto flex justify-center">
-                    <div class="p-14 h-32 flex justify-center mt-16 items-center btn-color">
+                    <div class="p-14 h-32 flex justify-center items-center btn-color">
                         <span class="textstroke">PEMDAS TIC TAC TOE</span>
                     </div>
                 </div>
@@ -73,28 +58,44 @@
                 <!-- button here -->
                 <div class="container mx-auto justify-center flex">
                     <div>
-                        <button class="w-96 h-32 mt-12 flex justify-center items-center btn-color" onclick="">
+                        <button class="w-96 h-24 mt-12 flex justify-center items-center btn-color" onclick="">
                             <!-- insert function here -->
-                            <span class="textstroke">JOIN ROOM</span>
+                            <span class="textstroke" style="font-size: 35px;">JOIN ROOM</span>
                         </button>
-                        <button class="w-96 h-32 mt-8 flex justify-center items-center btn-color" onclick="">
+                        <button class="w-96 h-24 mt-8 flex justify-center items-center btn-color" onclick="">
                             <!-- insert function here -->
-                            <span class="textstroke">CREATE ROOM</span>
+                            <span class="textstroke" style="font-size: 35px;">CREATE ROOM</span>
                         </button>
                     </div>
                 </div>
 
 
                 <div class="container mx-auto justify-center flex">
-                    <button class="w-44 h-32 mt-8 mr-4 flex justify-center items-center btn-color" onclick="">
+                    <button class="w-44 h-24 mt-8 mr-4 flex justify-center items-center btn-color" onclick="">
                         <!-- insert function here -->
 
-                        <img style="scale: 1;" src="https://media.discordapp.net/attachments/986985862631915541/1208823235706232893/icon_Trophy.png?ex=65e4af5e&is=65d23a5e&hm=5bfba419c812f46978074d714ff4ef0fd99f7c7be73e5df215d763aa64185e7a&=&format=webp&quality=lossless&width=102&height=87">
+                        <img style="scale: 0.7;" src="https://media.discordapp.net/attachments/986985862631915541/1208823235706232893/icon_Trophy.png?ex=65e4af5e&is=65d23a5e&hm=5bfba419c812f46978074d714ff4ef0fd99f7c7be73e5df215d763aa64185e7a&=&format=webp&quality=lossless&width=102&height=87">
                     </button>
-                    <button class="w-44 h-32 mt-8 ml-4 flex justify-center items-center btn-color" onclick="location.href = 'SignIn.html'">
+                    <button class="w-44 h-24 mt-8 ml-4 flex justify-center items-center btn-color" onclick="location.href = 'SignIn.html'">
                         <!-- insert function here -->
 
-                        <img style="scale: 1;" src="https://media.discordapp.net/attachments/986985862631915541/1208823235169222686/icon-Exit.png?ex=65e4af5e&is=65d23a5e&hm=727a9cfa6ed8b6b4581b7a1e7bd4905615ef1aa4643efc6729ab63830fa74ff3&=&format=webp&quality=lossless&width=90&height=92">
+                        <img style="scale: 0.7;" src="https://media.discordapp.net/attachments/986985862631915541/1208823235169222686/icon-Exit.png?ex=65e4af5e&is=65d23a5e&hm=727a9cfa6ed8b6b4581b7a1e7bd4905615ef1aa4643efc6729ab63830fa74ff3&=&format=webp&quality=lossless&width=90&height=92">
+                    </button>
+                </div>
+                <div class="container mx-auto flex overflow-hidden justify-end pr-8" style="width: 100vw;">
+                    <button class="relative w-28 h-28 mt-8 ml-8 flex justify-center items-center round-btn" style="right: 0;"
+                        onclick="">
+                        <!-- insert function here -->
+
+                        <img style="scale: 0.8;"
+                            src="https://media.discordapp.net/attachments/986985862631915541/1208860267203661865/icon-star.png?ex=65e4d1db&is=65d25cdb&hm=100cc8f09f5d5862d1c535ed50191b3384d7e12b58095f441e36ea8420f5926e&=&format=webp&quality=lossless&width=86&height=83">
+                    </button>
+                    <button class="relative w-28 h-28 mt-8 ml-8 flex justify-center items-center round-btn" style="right: 0;"
+                        onclick="">
+                        <!-- insert function here -->
+
+                        <img style="scale: 0.8;"
+                            src="https://media.discordapp.net/attachments/986985862631915541/1208860266964451378/icon-question.png?ex=65e4d1db&is=65d25cdb&hm=fe16d87cd370a93cd80f5b6a9dc462a9eecf60e10384895662afaf5f4537a62b&=&format=webp&quality=lossless&width=30&height=50">
                     </button>
                 </div>
             </div>

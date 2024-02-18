@@ -10,7 +10,9 @@
     border: 13px solid #EA5455;
     border-radius: 40px;
 }
-
+.btn-shadow{
+    
+}
 .inp-color {
     background-color: white;
     border: 13px solid #EA5455;
@@ -25,4 +27,20 @@
 .feedback-text-color{
     color: #EA5455;
     font-size: 25px;
+}
+.exit-btn {
+    width: 80px;
+    height: 80px;
+    right: -50px;
+    top: 0;
+    background-color: #EA5455;
+    border: 5px solid #EA5455;
+    border-radius: 100px;
+    font-size: 50px;
+    color: white;
+}
+.ent-color {
+    background-color: white;
+    border: 8px solid #EA5455;
+    border-radius: 40px;
 }
