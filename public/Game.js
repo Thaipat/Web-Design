@@ -16,6 +16,51 @@ const waitingText = `<span>Wait for</span><br>
 <span>another</span><br>
 <span>player</span>`
 
+function randomQuiz() {
+    let numPlus = Math.floor(Math.random() * 50)
+    let numMinus = Math.floor(Math.random() * 40)
+    let numDivide = Math.floor(Math.random() * 3 + 1)
+    let numMultiply = Math.floor(Math.random() * 9 + 2)
+    let order = Math.floor(Math.random() * 5)
+    console.log("Random order:", order)
+    if (order == 0) {
+        if (!Number.isInteger(numPlus - numMinus / numDivide * numMultiply)) {
+            randomQuiz()
+        } else {
+            console.log(numPlus, "-", numMinus, "/", numDivide, "*", numMultiply)
+            console.log("Ans :", (numPlus - numMinus / numDivide * numMultiply))
+        }
+    } else if (order == 1) {
+        if (!Number.isInteger(numPlus / numDivide - numMinus * numMultiply)) {
+            randomQuiz()
+        } else {
+            console.log(numPlus, "/", numDivide, "-", numMinus, "*", numMultiply)
+            console.log("Ans :", (numPlus / numDivide - numMinus * numMultiply))
+        }
+    } else if (order == 2) {
+        if (!Number.isInteger(numPlus / numDivide * numMultiply - numMinus)) {
+            randomQuiz()
+        } else {
+            console.log(numPlus, "/", numDivide, "*", numMultiply, "-", numMinus)
+            console.log("Ans :", (numPlus / numDivide * numMultiply - numMinus))
+        }
+    }else if(order == 3){
+        if (!Number.isInteger(numPlus * numMultiply / numDivide - numMinus)) {
+            randomQuiz()
+        } else {
+            console.log(numPlus, "*", numMultiply, "/", numDivide, "-", numMinus)
+            console.log("Ans :", (numPlus * numMultiply / numDivide - numMinus))
+        }
+    }else if(order == 4){
+        if (!Number.isInteger(numPlus * numMultiply - numMinus / numDivide)) {
+            randomQuiz()
+        } else {
+            console.log(numPlus, "*", numMultiply, "-", numMinus, "/", numDivide)
+            console.log("Ans :", (numPlus * numMultiply - numMinus / numDivide))
+        }
+    }
+}
+
 gameRef.on("value", (snapshot) => {
     getGameInfo(snapshot);
 })
@@ -54,6 +99,7 @@ function backToMenu() {
         let currentUser = firebase.auth().currentUser
         accountRef.once("value").then((snapshot) => {
             snapshot.forEach((data) => {
+                let accountid = data.key
                 let username = data.val().username
                 let accountRoomCode = data.val().roomCode
                 if (username == currentUser.displayName) {
@@ -61,8 +107,10 @@ function backToMenu() {
                         let gameid = data.key
                         let gameRoomCode = data.val().roomCode
                         if (gameRoomCode == accountRoomCode) {
-                            gameRef.child(gameid).remove().then(function(){
+                            gameRef.child(gameid).remove().then(function () {
                                 document.location.href = "Home.html"
+                            }).then(function () {
+                                accountRef.child(accountid).child("roomCode").remove();
                             })
                         }
                     })
