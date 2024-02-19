@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -57,13 +58,15 @@
     <!-- button here -->
     <div class="container mx-auto justify-center flex">
         <div class="text-center">
-            <button id="login_btn" class="w-96 h-30 mt-8 flex justify-center items-center btn-color" onclick="signinAccount()">
+            <button id="login_btn" class="w-96 h-30 mt-8 flex justify-center items-center btn-color"
+                onclick="signinAccount()">
                 <!-- insert function here -->
 
                 <span style="font-size: 35px;" class="textstroke">Log in</span>
             </button>
 
-            <button id="registerPage_btn" style="font-size: 35px; color: white;" onclick="location.href = 'Register.html'">
+            <button id="registerPage_btn" style="font-size: 35px; color: white;"
+                onclick="location.href = 'Register.html'">
                 <!-- insert function here -->
 
                 <u>Register</u>

@@ -27,7 +27,7 @@ function getGameInfo(gameSnapshot) {
             let username = data.val().username
             let userRoomCode = data.val().roomCode
             if (username == currentUser.displayName) {
-                document.querySelector("#Roomcode-number").innerText = userRoomCode
+                document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
                 gameSnapshot.forEach((data) => {
                     let gameRoomCode = data.val().roomCode
                     let user1 = data.val().user1

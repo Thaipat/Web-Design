@@ -106,12 +106,15 @@ function signupAccount() {
             } else if (currentPassword == confirmPassword) {
                 let email = currentUsername + "@it.kmitl.ac.th"
                 console.log(email)
-                firebase.auth().createUserWithEmailAndPassword(email, currentPassword)
-                accountRef.push({
-                    username: currentUsername,
-                    password: currentPassword,
+                firebase.auth().createUserWithEmailAndPassword(email, currentPassword).then(function () {
+                    accountRef.push({
+                        username: currentUsername,
+                        password: currentPassword,
+                    })
+                    firebase.auth().signOut().then(function(){
+                        document.location.href = "index.html"
+                    })
                 })
-                document.location.href = "index.html"
             } else {
                 document.querySelector("#register_Cpassword").value = ""
                 document.querySelector("#confirmpassword-feedback").innerHTML = signupPasswordFeedback
