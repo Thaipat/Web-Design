@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -20,6 +21,49 @@
     .tutorial-btn{
         width: 10vw;
         height: 10vh;
+    }
+    .exit-leaderboard {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        top: 20px;
+        background-color: #EA5455;
+        border: 5px solid #EA5455;
+        border-radius: 100px;
+        font-size: 50px;
+        color: white;
+    }
+    .exit-rating{
+        width: 50px;
+        height: 50px;
+        right: 5px;
+        top: 10px;
+        background-color: #EA5455;
+        border: 5px solid #EA5455;
+        border-radius: 100px;
+        font-size: 50px;
+        color: white;
+    }
+    .leaderboard-frame{
+        background-color: white;
+        border: 7px solid #EA5455;
+        border-radius: 40px;
+        width: 30vw;
+        height: 90%;
+    }
+    .space{
+        margin-right: 2vw;
+    }
+    .uncheck{
+        color:#2D4059;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: white;
+
+    }
+    .checked{
+        color:#FFD460;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: white;
     }
 </style>
 
@@ -93,6 +137,111 @@
                 <!-- <img style="width: 70vw;" src="https://media.discordapp.net/attachments/986985862631915541/1209051011679912017/image.png?ex=65e58380&is=65d30e80&hm=657203c24c8a74a90014f05ad8337d09dbfdb94c358f2a94172d04b8d6f109b7&=&format=webp&quality=lossless&width=687&height=321"> -->
                 <!-- <img style="width: 70vw;" src="https://media.discordapp.net/attachments/986985862631915541/1209051065371336704/image.png?ex=65e5838d&is=65d30e8d&hm=bc4352646e90bcf79626e5e0eb2e3db22568e414e260e42aee8d45c74da88d58&=&format=webp&quality=lossless&width=687&height=323"> -->
                 <!-- <img style="width: 70vw;" src="https://media.discordapp.net/attachments/986985862631915541/1209051140205842502/image.png?ex=65e5839e&is=65d30e9e&hm=b8628417de89585daee84c9b302c0617b4ea51e336d41c758859eb81f43cf5af&=&format=webp&quality=lossless&width=687&height=322"> -->
+
+                <div class="absolute flex justify-center items-center" id="rating">
+                    <!-- <div class="relative flex justify-center items-center z-10"
+                        style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+                        <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+                            <button id="exit_leaderboard"
+                                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick=""> x
+                            </button>
+                            <div class="text-center textstroke">
+                                <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
+                                <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
+                                    <span class="fa fa-star uncheck"></span>
+                                    <span class="fa fa-star uncheck"></span>
+                                    <span class="fa fa-star uncheck"></span>
+                                    <span class="fa fa-star uncheck"></span>
+                                    <span class="fa fa-star uncheck"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <span class="fa fa-star checked"></span> -->
+
+                <div class="absolute flex justify-center items-center" id="leaderboard">
+                    <!-- <div class="relative flex justify-center items-center z-10"
+                        style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+                        <div class="relative flex justify-center btn-color p-10" style="width: 40vw; height: 90vh;">
+                            <button id="exit_leaderboard"
+                                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick=""> x
+                            </button>
+                            <div class="text-center textstroke">
+                                <div style="font-size: calc(1.5vw + 1.5vh); margin-bottom:10px;">Leaderboard</div>
+                                <div class="leaderboard-frame p-4 flex justify-center">
+                                    <div style="height:fit-content; width:100%;">
+                                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh);">
+                                            <div class="space">Rank</div>
+                                            <div>Name</div>
+                                            <div class="container flex justify-end pr-3"><span>Win</span></div>
+                                        </div>
+                                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;">
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+                                            <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                                                <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                                                <div id="Uname">Karn</div>
+                                                <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
 
 
             <div>
