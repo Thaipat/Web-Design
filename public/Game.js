@@ -36,13 +36,38 @@ function getGameInfo(gameSnapshot) {
                         document.querySelector("#PlayerName1-sign").innerText = user1
                         document.querySelector("#PlayerName2-sign").innerText = "..."
                         document.querySelector("#countdownText").innerHTML = waitingText
+                        document.querySelector("#game-back").style.display = "flex"
                     } else if (userRoomCode == gameRoomCode) {
                         document.querySelector("#PlayerName1-sign").innerText = user1
                         document.querySelector("#PlayerName2-sign").innerText = user2
                         document.querySelector("#countdownText").innerHTML = countDownText
+                        document.querySelector("#game-back").style.display = "none"
                     }
                 })
             }
+        })
+    })
+}
+
+function backToMenu() {
+    gameRef.on("value", (gameSnapshot) => {
+        let currentUser = firebase.auth().currentUser
+        accountRef.once("value").then((snapshot) => {
+            snapshot.forEach((data) => {
+                let username = data.val().username
+                let accountRoomCode = data.val().roomCode
+                if (username == currentUser.displayName) {
+                    gameSnapshot.forEach((data) => {
+                        let gameid = data.key
+                        let gameRoomCode = data.val().roomCode
+                        if (gameRoomCode == accountRoomCode) {
+                            gameRef.child(gameid).remove().then(function(){
+                                document.location.href = "Home.html"
+                            })
+                        }
+                    })
+                }
+            })
         })
     })
 }
