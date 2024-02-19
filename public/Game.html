@@ -51,68 +51,45 @@
         justify-content: center;
         align-items: center;
     }
-    pop-up-container{
-        position: absolute;
+    .text-size{
+        font-size: 8rem;
+    }
+    .test-text{
+        font-size: calc(1.5vw + 1.5vh);
     }
 </style>
 
 <body style="background-color: #2D4059;">
-        <!-- <div class="pop-up-container" id="join-room">
-            <div class="absolute flex justify-center items-center z-10"
-                style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
-                <div class="p-14 flex justify-center items-center btn-color" style="width: 800px; height: 275px;">
-                    <div class="relative w-auto h-auto text-center">
 
-                        <button id="exit_btn"
-                            class="absolute exit-btn flex justify-center items-center text-center pb-3" onclick="closeJoinRoom()"> x
+    <div id="winlose">
+        <div class="absolute flex justify-center items-center z-10"
+            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+
+
+                <div class="relative w-auto h-auto text-center">
+                    <div class="textstroke text-size">
+                        You<br>
+                        <span id="player-winlose">XXX</span>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="">
+                            <!-- insert function here -->
+                            <span class="textstroke test-text">BACK TO MENU</span>
                         </button>
-
-                        <div class="textstroke">Join Room</div>
-                        <div id="roomcode" style="font-size: 50px; width: auto; height: 120px;"
-                            class="flex inp-color mt-4 pl-4 pr-4 text-left items-center">
-                            <label class="pr-3">Code :</label><input
-                                style="margin-right: 50px; width: 180px; border: none; outline: none;" maxlength="6"
-                                id="roomcode" type="text" placeholder="######">
-                            <button class="ent-color pl-2 pr-2" style="font-size: 35px;">Enter</button>
-                        </div>
                     </div>
                 </div>
+
+
             </div>
-        </div> -->
-
-        <div class="pop-up-container" id="tutorial">
-            <!-- <div class="relative flex justify-center items-center z-10"
-                style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-                <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
-                    <div class="text-center">
-                        <div class="flex justify-center mt-4">
-                            <img style="width: 70%;" src="https://media.discordapp.net/attachments/986985862631915541/1208889574634422272/tutorial-1.png?ex=65e4ed26&is=65d27826&hm=4e44f56600bc37478b7ae1d57a9d2be2e25541ed7e1eac945b3c355c81da1d68&=&format=webp&quality=lossless&width=1191&height=670">
-                        </div>
-                        <div class="relative flex justify-center">
-                            <div class="tutorial-textbox mt-4 p-3">
-                                <span>โจทย์ Pemdas กำลังจะมาใน 5 วินาที เตรียมตัว!!</span>
-                            </div>
-                        </div>
-                        <div class="relative flex justify-center items-center m-4">
-                            <button class="tutorial-btn flex justify-center items-center btn-color" onclick="">
-                                <span class="textstroke" style="font-size: 35px;">close</span>
-                            </button>
-                            <div class="tutorial-btn flex justify-center items-center btn-color"
-                            style="margin-left: 10vw; margin-right: 10vw;">
-                                <span class="textstroke" style="font-size: 35px;">
-                                    <span id="tutorial-page">1</span>/6
-                                </span>
-                            </div>
-                            <button class="tutorial-btn flex justify-center items-center btn-color" onclick="">
-                                <span class="textstroke relative" style="font-size: 35px;">next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
+    </div>
+
+
+
+
     <div class="container mx-auto game-grid justify-center items-center">
-        <div class="child flex justify-center items-center">
+        <div class="child flex justify-center items-center p-8">
             <div>
                 <div class="p-14 h-32 mb-8 flex justify-center items-center btn-color">
                     <span style="font-size: 60px; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
@@ -209,13 +186,13 @@
             </div>
         </div>
 
-        
 
-        <div class="child flex justify-center items-center">
+
+        <div class="child flex justify-center items-center p-8">
             <div>
                 <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color">
                     <span class="textstroke">Room Code<br>
-                        <span style="font-size: 70px;" id="Roomcode-number">######</span>
+                        <span style="font-size: 40px;" id="Roomcode-number">######</span>
                     </span>
                 </div>
 
@@ -223,12 +200,12 @@
                     <div class="textstroke">
                         <span>PEMDAS</span><br>
                         <span>is coming in</span><br>
-                        <div style="font-size: 80px;">
+                        <div style="font-size: 40px;">
                             <span id="game-timer">5</span><span> secs</span>
                         </div>
                     </div>
                 </div>
-                <button class="w-96 h-32 mt-4 flex justify-center items-center btn-color" onclick="">
+                <button class="w-96 h-32 flex justify-center items-center btn-color" onclick="">
                     <!-- insert function here -->
                     <span style="font-size: 40px;" class="textstroke">BACK TO MENU</span>
                 </button>

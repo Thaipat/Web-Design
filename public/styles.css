@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+*{
+    font-family: 'Itim', sans-serif;
+}
+
 .textstroke {
     color: #2D4059;
-    -webkit-text-stroke: 1.5px white;
+    text-shadow: 2px 2px white,
+        2px 0 white,
+        2px -2px white,
+        0 -2px white,
+        -2px -2px white,
+        -2px 0 white,
+        -2px 2px white,
+        0 2px white;
     font-size: 50px;
     font-weight: bold;
 }
@@ -11,7 +24,7 @@
     border-radius: 40px;
 }
 .btn-shadow{
-    
+
 }
 .inp-color {
     background-color: white;
