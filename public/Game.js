@@ -16,7 +16,33 @@ const waitingText = `<span>Wait for</span><br>
 <span>another</span><br>
 <span>player</span>`
 
-function randomQuiz() {
+const pemdasPopup = `<div class="absolute flex justify-center items-center z-10"
+style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+<div class="p-14 flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+    <div class="text-center">
+        <span class="textstroke">Finish the PEMDAS !</span>
+        <div class="flex justify-center items-center" style="margin-top: 10vh;">
+            <div class="pemdas-question-frame p-4 flex justify-center items-center text-center">
+                <span id="pemdas-question" class="test-text">here is the question</span>
+            </div>
+        </div>
+        <div class="container mx-auto flex justify-center">
+            <div id="answer" style="font-size: 50px; width: 650px; height: 120px; margin-top: 10vh;"
+                class="flex pemdas-question-frame mt-4 pl-4 pr-4 text-left items-center">
+                <label class="pr-3">Ans :</label><input
+                    style="margin-right: 50px; width: 300px; border: none; outline: none;"
+                    id="roomcode" type="number" placeholder="_______________">
+                <button class="ent-color pl-2" style="font-size: 35px;" onclick="">Enter</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>`
+
+let quizText = ""
+let quizAns = 0
+
+function randomQuiz(gameid) {
     let numPlus = Math.floor(Math.random() * 50)
     let numMinus = Math.floor(Math.random() * 40)
     let numDivide = Math.floor(Math.random() * 3 + 1)
@@ -25,38 +51,68 @@ function randomQuiz() {
     console.log("Random order:", order)
     if (order == 0) {
         if (!Number.isInteger(numPlus - numMinus / numDivide * numMultiply)) {
-            randomQuiz()
+            randomQuiz(gameid)
         } else {
+            quizText = numPlus + "-" + numMinus + "/" + numDivide + "*" + numMultiply
+            quizAns = numPlus - numMinus / numDivide * numMultiply
             console.log(numPlus, "-", numMinus, "/", numDivide, "*", numMultiply)
             console.log("Ans :", (numPlus - numMinus / numDivide * numMultiply))
+            gameRef.child(gameid).update({
+                quizText: quizText,
+                quizAns: quizAns
+            })
         }
     } else if (order == 1) {
         if (!Number.isInteger(numPlus / numDivide - numMinus * numMultiply)) {
-            randomQuiz()
+            randomQuiz(gameid)
         } else {
+            quizText = numPlus + "/" + numDivide + "-" + numMinus + "*" + numMultiply
+            quizAns = numPlus / numDivide - numMinus * numMultiply
             console.log(numPlus, "/", numDivide, "-", numMinus, "*", numMultiply)
             console.log("Ans :", (numPlus / numDivide - numMinus * numMultiply))
+            gameRef.child(gameid).update({
+                quizText: quizText,
+                quizAns: quizAns
+            })
         }
     } else if (order == 2) {
         if (!Number.isInteger(numPlus / numDivide * numMultiply - numMinus)) {
-            randomQuiz()
+            randomQuiz(gameid)
         } else {
+            quizText = numPlus + "/" + numDivide + "*" + numMultiply + "-" + numMinus
+            quizAns = numPlus / numDivide * numMultiply - numMinus
             console.log(numPlus, "/", numDivide, "*", numMultiply, "-", numMinus)
             console.log("Ans :", (numPlus / numDivide * numMultiply - numMinus))
+            gameRef.child(gameid).update({
+                quizText: quizText,
+                quizAns: quizAns
+            })
         }
-    }else if(order == 3){
+    } else if (order == 3) {
         if (!Number.isInteger(numPlus * numMultiply / numDivide - numMinus)) {
-            randomQuiz()
+            randomQuiz(gameid)
         } else {
+            quizText = numPlus + "*" + numMultiply + "/" + numDivide + "-" + numMinus
+            quizAns = numPlus * numMultiply / numDivide - numMinus
             console.log(numPlus, "*", numMultiply, "/", numDivide, "-", numMinus)
             console.log("Ans :", (numPlus * numMultiply / numDivide - numMinus))
+            gameRef.child(gameid).update({
+                quizText: quizText,
+                quizAns: quizAns
+            })
         }
-    }else if(order == 4){
+    } else if (order == 4) {
         if (!Number.isInteger(numPlus * numMultiply - numMinus / numDivide)) {
-            randomQuiz()
+            randomQuiz(gameid)
         } else {
+            quizText = numPlus + "*" + numMultiply + "-" + numMinus + "/" + numDivide
+            quizAns = numPlus * numMultiply - numMinus / numDivide
             console.log(numPlus, "*", numMultiply, "-", numMinus, "/", numDivide)
             console.log("Ans :", (numPlus * numMultiply - numMinus / numDivide))
+            gameRef.child(gameid).update({
+                quizText: quizText,
+                quizAns: quizAns
+            })
         }
     }
 }
@@ -64,6 +120,9 @@ function randomQuiz() {
 gameRef.on("value", (snapshot) => {
     getGameInfo(snapshot);
 })
+
+let counDownNum = 5
+let isCount = false
 
 function getGameInfo(gameSnapshot) {
     accountRef.once("value").then((snapshot) => {
@@ -74,9 +133,13 @@ function getGameInfo(gameSnapshot) {
             if (username == currentUser.displayName) {
                 document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
                 gameSnapshot.forEach((data) => {
+                    let gameid = data.key
                     let gameRoomCode = data.val().roomCode
                     let user1 = data.val().user1
                     let user2 = data.val().user2
+                    let gameQuizText = data.val().quizText
+                    let gameQuizAns = data.val().quizAns
+                    let timer = data.val().timer
                     if (user2 == undefined) {
                         document.querySelector("#PlayerName1-sign").innerText = user1
                         document.querySelector("#PlayerName2-sign").innerText = "..."
@@ -87,11 +150,34 @@ function getGameInfo(gameSnapshot) {
                         document.querySelector("#PlayerName2-sign").innerText = user2
                         document.querySelector("#countdownText").innerHTML = countDownText
                         document.querySelector("#game-back").style.display = "none"
+                        document.querySelector("#game-timer").innerText = timer
+                        
+                        if(!isCount){
+                            isCount = true
+                            gameCountDown(gameid)
+                        }
                     }
                 })
             }
         })
     })
+}
+
+function gameCountDown(gameid){
+    setInterval(function () {
+        if (counDownNum >= 0) {
+            console.log(counDownNum)
+            gameRef.child(gameid).update({
+                timer: counDownNum
+            }).then(function(){
+                counDownNum -= 1
+            })
+        } else if (counDownNum == -1) {
+            randomQuiz(gameid)
+            document.querySelector("#pemdas-question").innerText = gameQuizText
+            counDownNum -= 1
+        }
+    }, 1000)
 }
 
 function backToMenu() {
