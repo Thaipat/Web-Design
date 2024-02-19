@@ -58,6 +58,19 @@
     .test-text{
         font-size: calc(1.5vw + 1.5vh);
     }
+    .pemdas-question-frame{
+        background-color: white;
+        border: 7px solid #EA5455;
+        border-radius: 40px;
+        width: 40vw;
+        height: 30vh;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
 </style>
 
 <body style="background-color: #2D4059;">
@@ -86,11 +99,35 @@
         </div> -->
     </div>
 
+    <div id="pemdasgame-page">
+        <!-- <div class="absolute flex justify-center items-center z-10"
+            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+            <div class="p-14 flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+                <div class="text-center">
+                    <span class="textstroke">Finish the PEMDAS !</span>
+                    <div class="flex justify-center items-center" style="margin-top: 10vh;">
+                        <div class="pemdas-question-frame p-4 flex justify-center items-center text-center">
+                            <span id="pemdas-question" class="test-text">here is the question</span>
+                        </div>
+                    </div>
+                    <div class="container mx-auto flex justify-center">
+                        <div id="answer" style="font-size: 50px; width: 650px; height: 120px; margin-top: 10vh;"
+                            class="flex pemdas-question-frame mt-4 pl-4 pr-4 text-left items-center">
+                            <label class="pr-3">Ans :</label><input
+                                style="margin-right: 50px; width: 300px; border: none; outline: none;"
+                                id="roomcode" type="number" placeholder="_______________">
+                            <button class="ent-color pl-2" style="font-size: 35px;" onclick="">Enter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
 
 
 
     <div class="container mx-auto game-grid justify-center items-center">
-        <div class="child flex justify-center items-center p-8">
+        <div class="child flex justify-center items-center pl-8">
             <div>
                 <div class="p-14 h-32 mb-8 flex justify-center items-center btn-color">
                     <span style="font-size: 60px; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
@@ -190,7 +227,7 @@
 
 
 
-        <div class="child flex justify-center items-center p-8 w-96">
+        <div class="child flex justify-center items-center p-8 w-96 pr-20">
             <div>
                 <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color">
                     <span class="textstroke">Room Code<br>
