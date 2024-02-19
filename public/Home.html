@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -84,6 +85,7 @@
                         </div>
                     </div>
                 </div> -->
+
             </div>
             <!-- img for tutorial -->
                 <!-- <img style="width: 70vw;" src="https://media.discordapp.net/attachments/986985862631915541/1209050876996751430/image.png?ex=65e58360&is=65d30e60&hm=ff3228e9dd3a5303246a99fee2d976a2e3f0958f1aa05b790adea4fd87b0b77b&=&format=webp&quality=lossless&width=981&height=457"> -->
@@ -105,11 +107,11 @@
                 <!-- button here -->
                 <div class="container mx-auto justify-center flex">
                     <div>
-                        <button class="w-96 btn-height mt-12 flex justify-center items-center btn-color" onclick="joinRoom()">
+                        <button class="w-96 btn-height mt-12 flex justify-center items-center btn-color" onclick="joinRoomPopup()">
                             <!-- insert function here -->
                             <span class="textstroke" style="font-size: 35px;">JOIN ROOM</span>
                         </button>
-                        <button class="w-96 btn-height mt-8 flex justify-center items-center btn-color" onclick="">
+                        <button class="w-96 btn-height mt-8 flex justify-center items-center btn-color" onclick="createRoom()">
                             <!-- insert function here -->
                             <span class="textstroke" style="font-size: 35px;">CREATE ROOM</span>
                         </button>
@@ -125,7 +127,7 @@
                             src="https://media.discordapp.net/attachments/986985862631915541/1208823235706232893/icon_Trophy.png?ex=65e4af5e&is=65d23a5e&hm=5bfba419c812f46978074d714ff4ef0fd99f7c7be73e5df215d763aa64185e7a&=&format=webp&quality=lossless&width=102&height=87">
                     </button>
                     <button class="w-44 btn-height mt-8 ml-4 flex justify-center items-center btn-color"
-                        onclick="location.href = 'SignIn.html'">
+                        onclick="signOutAccount()">
                         <!-- insert function here -->
 
                         <img style="scale: 0.7;"
@@ -166,7 +168,9 @@
         };
         firebase.initializeApp(firebaseConfig)
     </script>
+    <script src="SignIn.js"></script>
     <script src="Home.js"></script>
+    <script src="Game.js"></script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -97,14 +98,15 @@
                 </div>
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> -1 : <span
+                    <span id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
                             style="font-size: 60px;">X</span></span>
                 </div>
 
-                <img class="mt-6 mb-6" src="https://media.discordapp.net/attachments/986985862631915541/1208823235454697512/sep_line_gamepage.png?ex=65e4af5e&is=65d23a5e&hm=d4401efa0b568e971d23b9a8ebd196adaac11b2ebccbd374246c316267f653cf&=&format=webp&quality=lossless&width=560&height=67">
+                <img class="mt-6 mb-6"
+                    src="https://media.discordapp.net/attachments/986985862631915541/1208823235454697512/sep_line_gamepage.png?ex=65e4af5e&is=65d23a5e&hm=d4401efa0b568e971d23b9a8ebd196adaac11b2ebccbd374246c316267f653cf&=&format=webp&quality=lossless&width=560&height=67">
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> -2 : <span
+                    <span id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
                             style="font-size: 60px;">O</span></span>
                 </div>
 
@@ -197,12 +199,19 @@
                 </div>
 
                 <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color">
+<<<<<<< Updated upstream
                     <div class="textstroke">
                         <span>PEMDAS</span><br>
                         <span>is coming in</span><br>
                         <div style="font-size: 40px;">
                             <span id="game-timer">5</span><span> secs</span>
                         </div>
+=======
+                    <div class="textstroke" id="countdownText">
+                        <span>Wait for</span><br>
+                        <span>another</span><br>
+                        <span>player</span>
+>>>>>>> Stashed changes
                     </div>
                 </div>
                 <button class="w-96 h-32 flex justify-center items-center btn-color" onclick="">
@@ -226,6 +235,8 @@
         };
         firebase.initializeApp(firebaseConfig)
     </script>
+    <script src="SignIn.js"></script>
+    <script src="Home.js"></script>
     <script src="Game.js"></script>
 </body>
 
