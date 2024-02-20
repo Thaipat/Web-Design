@@ -101,7 +101,7 @@ tutorialImg = [`https://media.discordapp.net/attachments/986985862631915541/1209
 
 let tutorialImgCount = 0
 
-function tutorial(){
+function tutorial() {
     document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
     <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
@@ -116,7 +116,7 @@ function tutorial(){
                 <div class="tutorial-btn flex justify-center items-center btn-color"
                 style="margin-left: 10vw; margin-right: 10vw;">
                     <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount+1}</span>/6
+                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
@@ -128,7 +128,7 @@ function tutorial(){
     </div>`
 }
 
-function nextTutorial(){
+function nextTutorial() {
     tutorialImgCount += 1
     tutorialImgCount == 5 ? document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
@@ -144,7 +144,7 @@ function nextTutorial(){
                 <div class="tutorial-btn flex justify-center items-center btn-color"
                 style="margin-left: 10vw; margin-right: 10vw;">
                     <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount+1}</span>/6
+                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="closeTutorial()">
@@ -167,7 +167,7 @@ function nextTutorial(){
                 <div class="tutorial-btn flex justify-center items-center btn-color"
                 style="margin-left: 10vw; margin-right: 10vw;">
                     <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount+1}</span>/6
+                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
@@ -179,7 +179,7 @@ function nextTutorial(){
     </div>`
 }
 
-function backTutorial(){
+function backTutorial() {
     tutorialImgCount -= 1
     tutorialImgCount == 0 ? document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
@@ -195,7 +195,7 @@ function backTutorial(){
                 <div class="tutorial-btn flex justify-center items-center btn-color"
                 style="margin-left: 10vw; margin-right: 10vw;">
                     <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount+1}</span>/6
+                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
@@ -218,7 +218,7 @@ function backTutorial(){
                 <div class="tutorial-btn flex justify-center items-center btn-color"
                 style="margin-left: 10vw; margin-right: 10vw;">
                     <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount+1}</span>/6
+                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
@@ -230,7 +230,119 @@ function backTutorial(){
     </div>`
 }
 
-function closeTutorial(){
+function closeTutorial() {
     tutorialImgCount = 0
     document.querySelector("#tutorial").innerHTML = ""
+}
+
+function leaderBoard() {
+    document.querySelector("#leaderboard").innerHTML = `<div class="relative flex justify-center items-center z-10"
+    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+    <div class="relative flex justify-center btn-color p-10" style="width: 40vw; height: 90vh;">
+        <button id="exit_leaderboard"
+            class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeLeaderBoard()"> x
+        </button>
+        <div class="text-center textstroke">
+            <div style="font-size: calc(1.5vw + 1.5vh); margin-bottom:10px;">Leaderboard</div>
+            <div class="leaderboard-frame p-4 flex justify-center">
+                <div style="height:fit-content; width:100%;">
+                    <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh);">
+                        <div class="space">Rank</div>
+                        <div>Name</div>
+                        <div class="container flex justify-end pr-3"><span>Win</span></div>
+                    </div>
+                    <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;">
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
+                            <div id="Uname">Karn</div>
+                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>`
+}
+
+function closeLeaderBoard() {
+    document.querySelector("#leaderboard").innerHTML = ""
+}
+
+function rating(){
+    document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
+    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+        <button id="exit_leaderboard"
+            class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
+        </button>
+        <div class="text-center textstroke">
+            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
+            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
+                <span class="fa fa-star uncheck"></span>
+                <span class="fa fa-star uncheck"></span>
+                <span class="fa fa-star uncheck"></span>
+                <span class="fa fa-star uncheck"></span>
+                <span class="fa fa-star uncheck"></span>
+            </div>
+
+        </div>
+    </div>
+</div>`
+}
+
+function closeRating(){
+    document.querySelector("#rating").innerHTML = ""
 }
