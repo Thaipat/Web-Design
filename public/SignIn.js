@@ -29,7 +29,6 @@ function signinAccount() {
     accountRef.once("value").then((snapshot) => {
         let checkUsername = false
         snapshot.forEach(function (data) {
-            var id = data.key;
             var username = data.val().username;
             var password = data.val().password;
 
