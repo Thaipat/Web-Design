@@ -74,7 +74,7 @@ function closeJoinRoom() {
 }
 
 function createRoom() {
-    let roomCode = Math.random().toString(36).substring(2, 7);
+    let roomCode = Math.random().toString(36).substring(2, 8);
     console.log("Room created! Code is " + roomCode)
     let currentUser = firebase.auth().currentUser;
     accountRef.once("value").then((snapshot) => {
