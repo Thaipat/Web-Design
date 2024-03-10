@@ -21,6 +21,45 @@ style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
 
 const gameRef = firebase.database().ref("Game")
 
+if (document.location.href == "file:///d%3A/Web-Design/public/Home.html" || document.location.href == "https://pemdas-project.web.app/Home.html" || document.location.href == "Home.html") {
+    gameRef.once("value").then((snapshot) => {
+        snapshot.forEach((data) => {
+            let currentUser = firebase.auth().currentUser.displayName;
+            let gameid = data.key;
+            let user1 = data.val().user1
+            let user2 = data.val().user2
+            if (user1 == currentUser || user2 == currentUser) {
+                user1 == currentUser ? gameRef.child(gameid).child("user1").remove().then(function () {
+                    accountRef.once("value").then((snapshot) => {
+                        snapshot.forEach((data) => {
+                            let username = data.val().username
+                            let accountid = data.key
+                            if (currentUser == username) {
+                                accountRef.child(accountid).child("roomCode").remove()
+                            }
+                        })
+                    })
+                    if (user2 == undefined) {
+                        gameRef.child(gameid).remove()
+                    }
+                }) : gameRef.child(gameid).child("user2").remove().then(function () {
+                    accountRef.once("value").then((snapshot) => {
+                        snapshot.forEach((data) => {
+                            let username = data.val().username
+                            let accountid = data.key
+                            if (currentUser == username) {
+                                accountRef.child(accountid).child("roomCode").remove()
+                            }
+                        })
+                    })
+                    if (user1 == undefined) {
+                        gameRef.child(gameid).remove()
+                    }
+                })
+            }
+        })
+    })
+}
 
 function joinRoomPopup() {
     document.querySelector("#join-room").style = "width:100%; height:100%;"
@@ -73,31 +112,71 @@ function closeJoinRoom() {
     document.querySelector("#join-room").innerHTML = ""
 }
 
+let isInGame = false;
+
 function createRoom() {
-    let roomCode = Math.random().toString(36).substring(2, 8);
-    console.log("Room created! Code is " + roomCode)
-    let currentUser = firebase.auth().currentUser;
-    accountRef.once("value").then((snapshot) => {
+    gameRef.once("value").then((snapshot) => {
         snapshot.forEach((data) => {
-            let id = data.key
-            let username = data.val().username
-            if (username == currentUser.displayName) {
-                accountRef.child(id).update({
-                    roomCode: roomCode
-                }).then(function () {
-                    gameRef.push({
-                        roomCode: roomCode,
-                        user1: currentUser.displayName
-                    }).then(function () {
-                        document.location.href = "Game.html"
-                    })
-                })
+            let currentUser = firebase.auth().currentUser.displayName
+            let user1 = data.val().user1
+            let user2 = data.val().user2
+            if (user1 == currentUser || user2 == currentUser) {
+                isInGame = true
             }
         })
+    }).then(function () {
+        if (!isInGame) {
+            let roomCode = Math.random().toString(36).substring(2, 8);
+            console.log("Room created! Code is " + roomCode)
+            let currentUser = firebase.auth().currentUser;
+            accountRef.once("value").then((snapshot) => {
+                snapshot.forEach((data) => {
+                    let id = data.key
+                    let username = data.val().username
+                    if (username == currentUser.displayName) {
+                        accountRef.child(id).update({
+                            roomCode: roomCode
+                        }).then(function () {
+                            gameRef.push({
+                                roomCode: roomCode,
+                                user1: currentUser.displayName
+                            }).then(function () {
+                                document.location.href = "Game.html"
+                            })
+                        })
+                    }
+                })
+            })
+        } else {
+            accountRef.once("value").then((snapshot) => {
+                snapshot.forEach((data) => {
+                    let currentUser = firebase.auth().currentUser
+                    let accountid = data.key
+                    let username = data.val().username
+                    if (username == currentUser.displayName) {
+                        gameRef.once("value").then((snapshot)=>{
+                            snapshot.forEach((data)=>{
+                                let gameRoomCode = data.val().roomCode
+                                let user1 = data.val().user1
+                                let user2 = data.val().user2
+                                if(user1 == currentUser.displayName || user2 == currentUser.displayName){
+                                    accountRef.child(accountid).update({
+                                        roomCode : gameRoomCode
+                                    }).then(function () {
+                                        document.location.href = "Game.html"
+                                    })
+                                }
+                            })
+                        })
+                    }
+                })
+            })
+        }
     })
+
 }
 
-tutorialImg = [`https://media.discordapp.net/attachments/986985862631915541/1209050641763278869/image.png?ex=65e58328&is=65d30e28&hm=f5d89357cdc0fbfbde061ed2534f4d5524b05ffd3876daa88259138a45cd06fe&=&format=webp&quality=lossless&width=982&height=451`, `https://media.discordapp.net/attachments/986985862631915541/1209050876996751430/image.png?ex=65e58360&is=65d30e60&hm=ff3228e9dd3a5303246a99fee2d976a2e3f0958f1aa05b790adea4fd87b0b77b&=&format=webp&quality=lossless&width=981&height=457`, `https://media.discordapp.net/attachments/986985862631915541/1209050945049067560/image.png?ex=65e58370&is=65d30e70&hm=7ca15c654a8b05f8c56ed0e445990d7c456258f2811965c0bffa36b7e75e2958&=&format=webp&quality=lossless&width=687&height=321`, `https://media.discordapp.net/attachments/986985862631915541/1209051011679912017/image.png?ex=65e58380&is=65d30e80&hm=657203c24c8a74a90014f05ad8337d09dbfdb94c358f2a94172d04b8d6f109b7&=&format=webp&quality=lossless&width=687&height=321`, `https://media.discordapp.net/attachments/986985862631915541/1209051065371336704/image.png?ex=65e5838d&is=65d30e8d&hm=bc4352646e90bcf79626e5e0eb2e3db22568e414e260e42aee8d45c74da88d58&=&format=webp&quality=lossless&width=687&height=323`, `https://media.discordapp.net/attachments/986985862631915541/1209051140205842502/image.png?ex=65e5839e&is=65d30e9e&hm=b8628417de89585daee84c9b302c0617b4ea51e336d41c758859eb81f43cf5af&=&format=webp&quality=lossless&width=687&height=322`]
+tutorialImg = [`https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-1.png?alt=media&token=24d49beb-ed02-4a66-8a2d-4f00a07fdd4f`, `https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-2.png?alt=media&token=48cd2ea7-ae47-486a-ac96-6b36dd6b6d7f`, `https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-3.png?alt=media&token=0822160e-0c07-4e8a-9013-22cdca65d4f8`, `https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-4.png?alt=media&token=c5f74fbc-0627-4464-95b3-bdf1be9d617e`, `https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-5.png?alt=media&token=d06e0d9e-0ed1-4f83-b031-0784e7a37c74`, `https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/tutorial-6.png?alt=media&token=46c78730-c3b8-40f1-9179-38f762334ca8`]
 
 let tutorialImgCount = 0
 
@@ -321,7 +400,7 @@ function closeLeaderBoard() {
     document.querySelector("#leaderboard").innerHTML = ""
 }
 
-function rating(){
+function rating() {
     document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
     <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
@@ -343,6 +422,6 @@ function rating(){
 </div>`
 }
 
-function closeRating(){
+function closeRating() {
     document.querySelector("#rating").innerHTML = ""
 }

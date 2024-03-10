@@ -1,15 +1,15 @@
 const accountRef = firebase.database().ref("Account")
 
-const signinUsernameFeedback = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+const signinUsernameFeedback = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
 <span class="feedback-text-color">Couldn't find your username</span>`
 
-const signinPasswordFeedback = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+const signinPasswordFeedback = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
 <span class="feedback-text-color">Password is incorrect</span>`
 
-const signupUsernameFeedback = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+const signupUsernameFeedback = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
 <span class="feedback-text-color">Username is already use</span>`
 
-const signupPasswordFeedback = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+const signupPasswordFeedback = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
 <span class="feedback-text-color">Confirm password is not match</span>`
 
 function signOutAccount() {
@@ -80,7 +80,7 @@ function signupAccount() {
             if (currentUsername == "") {
                 document.querySelector("#register_password").value = ""
                 document.querySelector("#register_Cpassword").value = ""
-                document.querySelector("#signup-username-feedback").innerHTML = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+                document.querySelector("#signup-username-feedback").innerHTML = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
                 <span class="feedback-text-color">Username cannot be empty</span>`
                 usernameValid = false
             } else if (username == currentUsername) {
@@ -95,12 +95,12 @@ function signupAccount() {
             document.querySelector("#signup-username-feedback").innerHTML = ""
             if (currentPassword == "") {
                 document.querySelector("#register_Cpassword").value = ""
-                document.querySelector("#confirmpassword-feedback").innerHTML = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+                document.querySelector("#confirmpassword-feedback").innerHTML = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
                 <span class="feedback-text-color">Password cannot be empty</span>`
             } else if (currentPassword.length < 6) {
                 document.querySelector("#register_password").value = ""
                 document.querySelector("#register_Cpassword").value = ""
-                document.querySelector("#confirmpassword-feedback").innerHTML = `<img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
+                document.querySelector("#confirmpassword-feedback").innerHTML = `<img style="scale: 0.8; max-height: 2rem" src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/warning.png?alt=media&token=165ae816-d2a4-462c-9da2-1555093461c2">
                 <span class="feedback-text-color">Password must be at least 6</span>`
             } else if (currentPassword == confirmPassword) {
                 let email = currentUsername + "@it.kmitl.ac.th"
@@ -109,6 +109,7 @@ function signupAccount() {
                     accountRef.push({
                         username: currentUsername,
                         password: currentPassword,
+                        winScore: 0,
                     })
                     firebase.auth().signOut().then(function(){
                         document.location.href = "index.html"

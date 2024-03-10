@@ -124,8 +124,10 @@ function getGameInfo(gameSnapshot) {
     accountRef.once("value").then((snapshot) => {
         let currentUser = firebase.auth().currentUser;
         snapshot.forEach((data) => {
+            let accountid = data.key
             let username = data.val().username
             let userRoomCode = data.val().roomCode
+            let winScore = data.val().winScore
             if (username == currentUser.displayName) {
                 document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
                 gameSnapshot.forEach((data) => {
@@ -233,6 +235,10 @@ function getGameInfo(gameSnapshot) {
                                 </div>
                             </div>
                         </div>`
+                        }else if(isGameEnd == true && currentUser.displayName == userWin){
+                            accountRef.child(accountid).update({
+                                winScore: winScore+1,
+                            })
                         }
                         document.querySelector("#turn-number").innerText = gameTurn
                     }
@@ -370,6 +376,8 @@ function backToMenu() {
                             })
                         }
                     })
+                } else {
+                    document.location.href = "Home.html"
                 }
             })
         })
