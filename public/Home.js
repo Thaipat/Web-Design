@@ -154,14 +154,14 @@ function createRoom() {
                     let accountid = data.key
                     let username = data.val().username
                     if (username == currentUser.displayName) {
-                        gameRef.once("value").then((snapshot)=>{
-                            snapshot.forEach((data)=>{
+                        gameRef.once("value").then((snapshot) => {
+                            snapshot.forEach((data) => {
                                 let gameRoomCode = data.val().roomCode
                                 let user1 = data.val().user1
                                 let user2 = data.val().user2
-                                if(user1 == currentUser.displayName || user2 == currentUser.displayName){
+                                if (user1 == currentUser.displayName || user2 == currentUser.displayName) {
                                     accountRef.child(accountid).update({
-                                        roomCode : gameRoomCode
+                                        roomCode: gameRoomCode
                                     }).then(function () {
                                         document.location.href = "Game.html"
                                     })
@@ -315,85 +315,45 @@ function closeTutorial() {
 }
 
 function leaderBoard() {
-    document.querySelector("#leaderboard").innerHTML = `<div class="relative flex justify-center items-center z-10"
-    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center btn-color p-10" style="width: 40vw; height: 90vh;">
-        <button id="exit_leaderboard"
-            class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeLeaderBoard()"> x
-        </button>
-        <div class="text-center textstroke">
-            <div style="font-size: calc(1.5vw + 1.5vh); margin-bottom:10px;">Leaderboard</div>
-            <div class="leaderboard-frame p-4 flex justify-center">
-                <div style="height:fit-content; width:100%;">
-                    <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh);">
-                        <div class="space">Rank</div>
-                        <div>Name</div>
-                        <div class="container flex justify-end pr-3"><span>Win</span></div>
-                    </div>
-                    <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;">
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
+    document.querySelector("#leaderboard").innerHTML = `
+    <div class="relative flex justify-center items-center z-10" style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+        <div class="relative flex justify-center btn-color p-10" style="width: 40vw; height: 90vh;">
+            <button id="exit_leaderboard"
+                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeLeaderBoard()"> x
+            </button>
+            <div class="text-center textstroke">
+                <div style="font-size: calc(1.5vw + 1.5vh); margin-bottom:10px;">Leaderboard</div>
+                <div class="leaderboard-frame p-4 flex justify-center">
+                    <div style="height:fit-content; width:100%;">
+                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh);">
+                            <div class="space">Rank</div>
+                            <div>Name</div>
+                            <div class="container flex justify-end pr-3"><span>Win</span></div>
                         </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
-                        <div class="flex justify-start" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
-                            <div id="Urank" style="width: 150px; text-align:left;">1</div>
-                            <div id="Uname">Karn</div>
-                            <div class="container flex justify-end"><span id="Uwin">999</span></div>
-                        </div>
+                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;" id="leaderList">
 
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</div>`
+    </div>`
+    let countLeaderList = 1;
+    accountRef.orderByChild("orderScore").limitToLast(50).once("value", function (snapshot) {
+        snapshot.forEach((data) => {
+            let username = data.val().username
+            let winScore = data.val().winScore
+            const newDiv = `
+            <div class="flex justify-start ml-5" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                <div id="Urank" style="width: 150px; text-align:left;">${countLeaderList}</div>
+                <div id="Uname">${username}</div>
+                <div class="container flex justify-end mr-4"><span id="Uwin">${winScore}</span></div>
+            </div>`
+            const newElement = document.createRange().createContextualFragment(newDiv);
+            document.querySelector("#leaderList").appendChild(newElement)
+            countLeaderList += 1
+        })
+    })
 }
 
 function closeLeaderBoard() {

@@ -110,6 +110,7 @@ function signupAccount() {
                         username: currentUsername,
                         password: currentPassword,
                         winScore: 0,
+                        orderScore: 1000000,
                     })
                     firebase.auth().signOut().then(function(){
                         document.location.href = "index.html"

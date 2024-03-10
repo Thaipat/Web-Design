@@ -128,6 +128,7 @@ function getGameInfo(gameSnapshot) {
             let username = data.val().username
             let userRoomCode = data.val().roomCode
             let winScore = data.val().winScore
+            let orderScore = data.val().orderScore
             if (username == currentUser.displayName) {
                 document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
                 gameSnapshot.forEach((data) => {
@@ -238,6 +239,7 @@ function getGameInfo(gameSnapshot) {
                         }else if(isGameEnd == true && currentUser.displayName == userWin){
                             accountRef.child(accountid).update({
                                 winScore: winScore+1,
+                                orderScore: orderScore-1,
                             })
                         }
                         document.querySelector("#turn-number").innerText = gameTurn
