@@ -14,6 +14,51 @@
 </head>
 
 <style>
+    .text-size{
+        font-size: 35px;
+    }
+    .back-btn{
+        margin-top: 32px;
+        margin-left: 32px;
+        left: 0;
+    }
+    .inp-color{
+        width: 384px;
+        height: 80px;
+    }
+    @media all and (max-width:992px) {
+        .back-btn{
+            left: 0;
+            top: -5px;
+            scale: 0.6;
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+
+        }
+    @media all and (max-width:630px) {
+        .back-btn{
+            left: -20px;
+            top: -20px;
+            scale: 0.4;
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+        .inp-color{
+            width: 300px;
+            height: 50px;
+            font-size: 20px;
+        }
+        .text-size{
+            font-size: 20px;
+        }
+        .regis-btn{
+            border: 5px solid #EA5455;
+            width: 200px;
+            height: 50px;
+        }
+        }
+
 </style>
 
 <body style="background-color: #2D4059;">
@@ -23,7 +68,7 @@
         <div class="p-14 h-32 flex justify-center mt-16 items-center btn-color">
             <span class="textstroke">PEMDAS TIC TAC TOE</span>
         </div>
-        <button class="absolute w-28 h-28 mt-8 ml-8 flex justify-center items-center round-btn" style="left: 0;"
+        <button class="absolute w-28 h-28 flex justify-center items-center round-btn back-btn"
             onclick="location.href = 'index.html'">
             <!-- insert function here -->
 
@@ -35,13 +80,13 @@
     <!-- input here -->
     <div class="container mx-auto flex justify-center">
         <div>
-            <input id="register_id" style="font-size: 35px;" class="inp-color mt-12 h-20 w-96 pl-4" type="text" placeholder="Username"><br>
+            <input id="register_id" class="inp-color mt-12 pl-4 text-size" type="text" placeholder="Username"><br>
             <div id="signup-username-feedback" class="invalid-feedback flex items-center p-0 m-0">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Username is already use</span> -->
             </div>
-            <input id="register_password" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4" type="password" placeholder="Password"><br>
-            <input id="register_Cpassword" style="font-size: 35px;" class="inp-color mt-4 h-20 w-96 pl-4" type="password" placeholder="Confirm Password">
+            <input id="register_password" class="inp-color mt-4 pl-4 text-size" type="password" placeholder="Password"><br>
+            <input id="register_Cpassword" class="inp-color mt-4 pl-4 text-size" type="password" placeholder="Confirm Password">
             <!-- feedback -->
             <div id="confirmpassword-feedback" class="invalid-feedback flex items-center p-0 m-0">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
@@ -57,9 +102,9 @@
     <!-- button here -->
     <div class="container mx-auto justify-center flex">
         <div class="text-center">
-            <button id="Register_btn" class="w-96 h-30 mt-8 flex justify-center items-center btn-color" onclick="signupAccount()">
+            <button id="Register_btn" class="mt-8 flex justify-center items-center btn-color regis-btn" onclick="signupAccount()">
                 <!-- insert function here -->
-                <span style="font-size: 35px;" class="textstroke">Register</span>
+                <span class="textstroke text-size">Register</span>
             </button>
 
         </div>

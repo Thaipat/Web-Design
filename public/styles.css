@@ -57,3 +57,36 @@
     border: 8px solid #EA5455;
     border-radius: 40px;
 }
+.text-size{
+    font-size: 35px;
+}
+@media all and (max-width:992px) {
+    .back-btn{
+        left: 0;
+        top: -50px;
+        scale: 0.4;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    }
+
+@media all and (max-width:630px) {
+    .textstroke{
+        font-size: 30px;
+        text-align: center;
+    }
+    .back-btn{
+        left: -20px;
+        top: -50px;
+        scale: 0.4;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .inp-color{
+        border: 5px solid #EA5455;
+    }
+    }
+@media all and (max-width:630px) {
+
+    }
+
