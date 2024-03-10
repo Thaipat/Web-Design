@@ -20,6 +20,7 @@ style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
 </div>`
 
 const gameRef = firebase.database().ref("Game")
+const ratingRef = firebase.database().ref("Rating")
 
 if (document.location.href == "file:///d%3A/Web-Design/public/Home.html" || document.location.href == "https://pemdas-project.web.app/Home.html" || document.location.href == "Home.html") {
     gameRef.once("value").then((snapshot) => {
@@ -330,7 +331,7 @@ function leaderBoard() {
                             <div>Name</div>
                             <div class="container flex justify-end pr-3"><span>Win</span></div>
                         </div>
-                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;" id="leaderList">
+                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none; overflow:hidden" id="leaderList">
 
                         </div>
                     </div>
@@ -344,10 +345,10 @@ function leaderBoard() {
             let username = data.val().username
             let winScore = data.val().winScore
             const newDiv = `
-            <div class="flex justify-start ml-5" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+            <div class="flex justify-start ml-6" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
                 <div id="Urank" style="width: 150px; text-align:left;">${countLeaderList}</div>
                 <div id="Uname">${username}</div>
-                <div class="container flex justify-end mr-4"><span id="Uwin">${winScore}</span></div>
+                <div class="container flex justify-end mr-12"><span id="Uwin">${winScore}</span></div>
             </div>`
             const newElement = document.createRange().createContextualFragment(newDiv);
             document.querySelector("#leaderList").appendChild(newElement)
@@ -370,16 +371,128 @@ function rating() {
         <div class="text-center textstroke">
             <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
             <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
-                <span class="fa fa-star uncheck"></span>
-                <span class="fa fa-star uncheck"></span>
-                <span class="fa fa-star uncheck"></span>
-                <span class="fa fa-star uncheck"></span>
-                <span class="fa fa-star uncheck"></span>
+                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
             </div>
 
         </div>
     </div>
 </div>`
+    let allStars = document.querySelectorAll(".fa-star")
+    allStars.forEach(function (star) {
+        star.addEventListener("click", clickedStar)
+    })
+}
+
+function hoverStar(event) {
+    switch (event.id) {
+        case "star1":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#2D4059"
+            document.querySelector("#star3").style.color = "#2D4059"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star2":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#2D4059"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star3":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star4":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#EA5455"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star5":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#EA5455"
+            document.querySelector("#star5").style.color = "#EA5455"
+            break;
+    }
+}
+
+function clickedStar(event) {
+    document.querySelector("#rating").innerHTML = ""
+    accountRef.once("value", (snapshot) => {
+        snapshot.forEach((data) => {
+            let currentUser = firebase.auth().currentUser.displayName
+            let username = data.val().username
+            let accountid = data.key
+            if (currentUser == username) {
+                switch (event.target.id) {
+                    case "star1":
+                        accountRef.child(accountid).update({
+                            rate: 1
+                        })
+                        break;
+                    case "star2":
+                        accountRef.child(accountid).update({
+                            rate: 2
+                        })
+                        break;
+                    case "star3":
+                        accountRef.child(accountid).update({
+                            rate: 3
+                        })
+                        break;
+                    case "star4":
+                        accountRef.child(accountid).update({
+                            rate: 4
+                        })
+                        break;
+                    case "star5":
+                        accountRef.child(accountid).update({
+                            rate: 5
+                        })
+                        break;
+                }
+            }
+        })
+    }).then(function () {
+        document.querySelector("#rating").innerHTML = `
+        <div class="relative flex justify-center items-center z-10"
+        style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+            <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+                <button id="exit_leaderboard"
+                    class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
+                </button>
+                <div class="text-center textstroke" style="display: flex;align-items: center;">
+                    <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                </div>
+            </div>
+        </div>`
+        let sumRate = 0;
+        let rateCount = 0;
+        accountRef.once("value", (snapshot) => {
+            snapshot.forEach((data) => {
+                let rate = data.val().rate
+                if(rate != undefined){
+                    sumRate += rate
+                    rateCount += 1
+                }
+            })
+        }).then(function(){
+            ratingRef.update({
+                gameRating: parseFloat(sumRate/rateCount).toFixed(1)
+            })
+        })
+    })
 }
 
 function closeRating() {
