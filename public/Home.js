@@ -331,7 +331,7 @@ function leaderBoard() {
                             <div>Name</div>
                             <div class="container flex justify-end pr-3"><span>Win</span></div>
                         </div>
-                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none; overflow:hidden" id="leaderList">
+                        <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;" id="leaderList">
 
                         </div>
                     </div>
