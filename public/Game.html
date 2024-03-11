@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -52,25 +53,50 @@
         justify-content: center;
         align-items: center;
     }
-    .text-size{
+
+    .text-size {
         font-size: 8rem;
     }
-    .test-text{
+
+    .test-text {
         font-size: calc(1.5vw + 1.5vh);
     }
-    .pemdas-question-frame{
+
+    .pemdas-question-frame {
         background-color: white;
         border: 7px solid #EA5455;
         border-radius: 40px;
         width: 40vw;
         height: 30vh;
     }
+
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+    .exit-rating {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        top: 20px;
+        background-color: #EA5455;
+        border: 5px solid #EA5455;
+        border-radius: 100px;
+        font-size: 50px;
+        color: white;
+    }
+    .uncheck {
+        color: #2D4059;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: white;
+    }
 
+    .checked {
+        color: #FFD460;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: white;
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -115,6 +141,29 @@
                             <button class="ent-color pl-2" style="font-size: 35px;" onclick="">Enter</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="absolute flex justify-center items-center" id="rating">
+        <!-- <div class="relative flex justify-center items-center z-10"
+            style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+            <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+                <button id="exit_rating"
+                    class="absolute exit-rating flex justify-center items-center text-center pb-3"
+                    onclick="closeRating()"> x
+                </button>
+                <div class="text-center textstroke">
+                    <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
+                    <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
+                        <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                        <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                        <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                        <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                        <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+                    </div>
+
                 </div>
             </div>
         </div> -->
@@ -232,8 +281,6 @@
             </div>
         </div>
 
-
-
         <div class="child flex justify-center items-center p-8 w-96 pr-20">
             <div>
                 <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color w-96">
@@ -249,7 +296,8 @@
                         <span>player</span>
                     </div>
                 </div>
-                <button class="w-96 h-32 flex justify-center items-center btn-color" id="game-back" onclick="backToMenu()">
+                <button class="w-96 h-32 flex justify-center items-center btn-color" id="game-back"
+                    onclick="backToMenu()">
                     <!-- insert function here -->
                     <span style="font-size: 40px;" class="textstroke">BACK TO MENU</span>
                 </button>

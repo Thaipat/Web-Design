@@ -129,6 +129,7 @@ function getGameInfo(gameSnapshot) {
             let userRoomCode = data.val().roomCode
             let winScore = data.val().winScore
             let orderScore = data.val().orderScore
+            let rate = data.val().rate
             if (username == currentUser.displayName) {
                 document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
                 gameSnapshot.forEach((data) => {
@@ -162,6 +163,8 @@ function getGameInfo(gameSnapshot) {
                         if (timer == 0 && isPemdas == false) {
                             document.querySelector("#pemdasgame-page").innerHTML = pemdasPopup
                             document.querySelector("#pemdas-question").innerText = gameQuizText
+                            gameTurnNum += 1
+                            playerTurn = ""
                             console.log(gameQuizText)
                             console.log("Ans : ", gameQuizAns)
                         } else if (timer == 0 && isPemdas == true) {
@@ -220,26 +223,32 @@ function getGameInfo(gameSnapshot) {
                         if (isGameEnd == true && currentUser.displayName != userWin) {
                             document.querySelector("#pemdasgame-page").innerHTML = ""
                             document.querySelector("#player-turn").innerHTML = ""
-                            document.querySelector("#winlose").innerHTML = `<div class="absolute flex justify-center items-center z-10"
-                            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
-                                <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size">
-                                        You<br>
-                                        <span id="player-winlose">Lose</span>
+                            if (rate == undefined) {
+                                rating()
+                            }
+                            else {
+                                document.querySelector("#winlose").innerHTML = `
+                                <div class="absolute flex justify-center items-center z-10"
+                                style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                                    <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                                        <div class="relative w-auto h-auto text-center">
+                                            <div class="textstroke text-size">
+                                                You<br>
+                                                <span id="player-winlose">Lose</span>
+                                            </div>
+                                            <div class="flex justify-center">
+                                                <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                                                    <span class="textstroke test-text">BACK TO MENU</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-center">
-                                        <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
-                                            <span class="textstroke test-text">BACK TO MENU</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`
-                        }else if(isGameEnd == true && currentUser.displayName == userWin){
+                                </div>`
+                            }
+                        } else if (isGameEnd == true && currentUser.displayName == userWin) {
                             accountRef.child(accountid).update({
-                                winScore: winScore+1,
-                                orderScore: orderScore-1,
+                                winScore: winScore + 1,
+                                orderScore: orderScore - 1,
                             })
                         }
                         document.querySelector("#turn-number").innerText = gameTurn
@@ -268,14 +277,12 @@ function gameCountDown(gameid) {
             }
             if (counDownNum == 1 && isPemdas == false) {
                 randomQuiz(gameid)
-                gameTurnNum += 1
                 gameRef.child(gameid).update({
                     timer: counDownNum,
                     user1Ans: 1000,
                     user2Ans: 1000,
                     gameTurn: gameTurnNum
                 })
-                playerTurn = ""
             }
         }
     }, 1000)
@@ -446,22 +453,37 @@ function clickedBox(event) {
                                 }).then(function () {
                                     document.querySelector("#pemdasgame-page").innerHTML = ""
                                     document.querySelector("#player-turn").innerHTML = ""
-                                    document.querySelector("#winlose").innerHTML = `<div class="absolute flex justify-center items-center z-10"
-                            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
-                                <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size">
-                                        You<br>
-                                        <span id="player-winlose">Win</span>
-                                    </div>
-                                    <div class="flex justify-center">
-                                        <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
-                                            <span class="textstroke test-text">BACK TO MENU</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`
+                                    accountRef.once("value", (snapshot) => {
+                                        snapshot.forEach((data) => {
+                                            let username = data.val().username
+                                            let rate = data.val().rate
+                                            let currentUser = firebase.auth().currentUser.displayName
+                                            if (currentUser == username) {
+                                                if (rate == undefined) {
+                                                    ratingWin()
+                                                }
+                                                else {
+                                                    document.querySelector("#winlose").innerHTML = `
+                                                    <div class="absolute flex justify-center items-center z-10"
+                                                    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                                                        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                                                            <div class="relative w-auto h-auto text-center">
+                                                                <div class="textstroke text-size">
+                                                                    You<br>
+                                                                    <span id="player-winlose">Win</span>
+                                                                </div>
+                                                                <div class="flex justify-center">
+                                                                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                                                                        <span class="textstroke test-text">BACK TO MENU</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>`
+                                                }
+                                            }
+                                        })
+                                    })
                                 })
                             }
                         }
@@ -470,4 +492,227 @@ function clickedBox(event) {
             })
         })
     }
+}
+
+function ratingWin() {
+    document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
+    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+        <button id="exit_rating"
+            class="absolute exit-rating flex justify-center items-center text-center pb-3"
+            onclick="closeRatingWin()"> x
+        </button>
+        <div class="text-center textstroke">
+            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
+            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
+                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+            </div>
+        </div>
+    </div>
+</div>`
+    let allStars = document.querySelectorAll(".fa-star")
+    allStars.forEach(function (star) {
+        star.addEventListener("click", clickedStar)
+    })
+}
+
+function rating() {
+    document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
+    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+        <button id="exit_rating"
+            class="absolute exit-rating flex justify-center items-center text-center pb-3"
+            onclick="closeRating()"> x
+        </button>
+        <div class="text-center textstroke">
+            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
+            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
+                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+            </div>
+        </div>
+    </div>
+</div>`
+    let allStars = document.querySelectorAll(".fa-star")
+    allStars.forEach(function (star) {
+        star.addEventListener("click", clickedStar)
+    })
+}
+
+function hoverStar(event) {
+    switch (event.id) {
+        case "star1":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#2D4059"
+            document.querySelector("#star3").style.color = "#2D4059"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star2":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#2D4059"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star3":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#2D4059"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star4":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#EA5455"
+            document.querySelector("#star5").style.color = "#2D4059"
+            break;
+        case "star5":
+            document.querySelector("#star1").style.color = "#EA5455"
+            document.querySelector("#star2").style.color = "#EA5455"
+            document.querySelector("#star3").style.color = "#EA5455"
+            document.querySelector("#star4").style.color = "#EA5455"
+            document.querySelector("#star5").style.color = "#EA5455"
+            break;
+    }
+}
+
+function clickedStar(event) {
+    document.querySelector("#rating").innerHTML = ""
+    accountRef.once("value", (snapshot) => {
+        snapshot.forEach((data) => {
+            let currentUser = firebase.auth().currentUser.displayName
+            let username = data.val().username
+            let accountid = data.key
+            if (currentUser == username) {
+                switch (event.target.id) {
+                    case "star1":
+                        accountRef.child(accountid).update({
+                            rate: 1
+                        })
+                        break;
+                    case "star2":
+                        accountRef.child(accountid).update({
+                            rate: 2
+                        })
+                        break;
+                    case "star3":
+                        accountRef.child(accountid).update({
+                            rate: 3
+                        })
+                        break;
+                    case "star4":
+                        accountRef.child(accountid).update({
+                            rate: 4
+                        })
+                        break;
+                    case "star5":
+                        accountRef.child(accountid).update({
+                            rate: 5
+                        })
+                        break;
+                }
+            }
+        })
+    }).then(function () {
+        gameRef.once("value", (snapshot) => {
+            snapshot.forEach((data) => {
+                let userWin = data.val().userWin
+                let currentUser = firebase.auth().currentUser.displayName
+                if (userWin == currentUser) {
+                    document.querySelector("#rating").innerHTML = `
+                    <div class="relative flex justify-center items-center z-10"
+                    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+                        <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+                            <button id="exit_rating"
+                                class="absolute exit-rating flex justify-center items-center text-center pb-3" onclick="closeRatingWin()"> x
+                            </button>
+                            <div class="text-center textstroke" style="display: flex;align-items: center;">
+                                <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                            </div>
+                        </div>
+                    </div>`
+                } else {
+                    document.querySelector("#rating").innerHTML = `
+                    <div class="relative flex justify-center items-center z-10"
+                    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+                        <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
+                            <button id="exit_rating"
+                                class="absolute exit-rating flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
+                            </button>
+                            <div class="text-center textstroke" style="display: flex;align-items: center;">
+                                <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                            </div>
+                        </div>
+                    </div>`
+                }
+            })
+        })
+        let sumRate = 0;
+        let rateCount = 0;
+        accountRef.once("value", (snapshot) => {
+            snapshot.forEach((data) => {
+                let rate = data.val().rate
+                if (rate != undefined) {
+                    sumRate += rate
+                    rateCount += 1
+                }
+            })
+        }).then(function () {
+            ratingRef.update({
+                gameRating: parseFloat(sumRate / rateCount).toFixed(1)
+            })
+        })
+    })
+}
+
+function closeRatingWin() {
+    document.querySelector("#rating").innerHTML = ""
+    document.querySelector("#winlose").innerHTML = `
+    <div class="absolute flex justify-center items-center z-10"
+    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+            <div class="relative w-auto h-auto text-center">
+                <div class="textstroke text-size">
+                    You<br>
+                    <span id="player-winlose">Win</span>
+                </div>
+                <div class="flex justify-center">
+                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                        <span class="textstroke test-text">BACK TO MENU</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>`
+}
+
+function closeRating() {
+    document.querySelector("#rating").innerHTML = ""
+    document.querySelector("#winlose").innerHTML = `
+    <div class="absolute flex justify-center items-center z-10"
+    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+            <div class="relative w-auto h-auto text-center">
+                <div class="textstroke text-size">
+                    You<br>
+                    <span id="player-winlose">Lose</span>
+                </div>
+                <div class="flex justify-center">
+                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                        <span class="textstroke test-text">BACK TO MENU</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>`
 }
