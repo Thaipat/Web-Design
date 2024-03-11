@@ -26,6 +26,9 @@
         width: 384px;
         height: 80px;
     }
+    .regis-btn{
+        width: 300px;
+    }
     @media all and (max-width:992px) {
         .back-btn{
             left: 0;
@@ -68,7 +71,7 @@
         <div class="p-14 h-32 flex justify-center mt-16 items-center btn-color">
             <span class="textstroke">PEMDAS TIC TAC TOE</span>
         </div>
-        <button class="absolute w-28 h-28 flex justify-center items-center round-btn back-btn"
+        <button class="absolute w-28 h-28 flex justify-center items-center round-btn back-btn btn-shadow hover:opacity-70"
             onclick="location.href = 'index.html'">
             <!-- insert function here -->
 
@@ -80,7 +83,7 @@
     <!-- input here -->
     <div class="container mx-auto flex justify-center">
         <div>
-            <input id="register_id" class="inp-color mt-12 pl-4 text-size" type="text" placeholder="Username"><br>
+            <input id="register_id" class="inp-color mt-12 pl-4 text-size" type="text" placeholder="Username" maxlength="6"><br>
             <div id="signup-username-feedback" class="invalid-feedback flex items-center p-0 m-0">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Username is already use</span> -->
@@ -102,7 +105,7 @@
     <!-- button here -->
     <div class="container mx-auto justify-center flex">
         <div class="text-center">
-            <button id="Register_btn" class="mt-8 flex justify-center items-center btn-color regis-btn" onclick="signupAccount()">
+            <button id="Register_btn" class="hover:opacity-70 mt-8 flex justify-center items-center btn-color regis-btn btn-shadow" onclick="signupAccount()">
                 <!-- insert function here -->
                 <span class="textstroke text-size">Register</span>
             </button>

@@ -24,7 +24,7 @@
     border-radius: 40px;
 }
 .btn-shadow{
-
+    box-shadow: 5px 10px 10px;
 }
 .inp-color {
     background-color: white;
@@ -85,8 +85,11 @@
     .inp-color{
         border: 5px solid #EA5455;
     }
+    .round-btn {
+        border: 5px solid #EA5455;
     }
-@media all and (max-width:630px) {
-
+    .ent-color{
+        border: 3px solid #EA5455;
+    }
     }
 

@@ -15,6 +15,10 @@
 </head>
 
 <style>
+    .game-frame{
+        max-width: 80vw;
+        max-height:80vw;
+    }
     .child {
         height: 100vh;
     }
@@ -57,8 +61,10 @@
     .text-size {
         font-size: 8rem;
     }
-
-    .test-text {
+    .back-size{
+        font-size: 40px;
+    }
+    .test-text{
         font-size: calc(1.5vw + 1.5vh);
     }
 
@@ -92,11 +98,40 @@
         -webkit-text-stroke-color: white;
     }
 
-    .checked {
-        color: #FFD460;
-        -webkit-text-stroke-width: 3px;
-        -webkit-text-stroke-color: white;
-    }
+    @media all and (max-width:630px) {
+        .game-frame{
+            max-width: 83vw;
+            max-height:83vw;
+            border-radius: 4vw;
+            margin: 5vw 0;
+        }
+        .box{
+            font-size: 7vw;
+            border: 1vw solid #EA5455;
+        }
+        .game-grid {
+            display: block;
+        }
+        .back-size{
+            font-size: 15px;
+            height: 70px;
+        }
+        .btn-color{
+            border: 5px solid #EA5455;
+        }
+        .game-board{
+            max-width: 80vw;
+            max-height:80vw;
+        }
+        .pemdas-question-frame{
+            border: 5px solid #EA5455;
+            min-width: 60vw;
+            max-height: 50vw;
+        }
+        .ent-color{
+            border: 2px solid #EA5455;
+        }
+        }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -104,14 +139,14 @@
     <div id="winlose">
         <!-- <div class="absolute flex justify-center items-center z-10"
             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+            <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 60vw;">
                 <div class="relative w-auto h-auto text-center">
-                    <div class="textstroke text-size">
+                    <div class="textstroke" style="font-size: 8vw;">
                         You<br>
                         <span id="player-winlose">XXX</span>
                     </div>
                     <div class="flex justify-center">
-                        <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="">
+                        <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;" onclick="">
 
                             <span class="textstroke test-text">BACK TO MENU</span>
                         </button>
@@ -126,19 +161,19 @@
             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
             <div class="p-14 flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
                 <div class="text-center">
-                    <span class="textstroke">Finish the PEMDAS !</span>
+                    <span class="textstroke" style="font-size:6vw;">Finish the PEMDAS !</span>
                     <div class="flex justify-center items-center" style="margin-top: 10vh;">
                         <div class="pemdas-question-frame p-4 flex justify-center items-center text-center">
                             <span id="pemdas-question" class="test-text">here is the question</span>
                         </div>
                     </div>
-                    <div class="container mx-auto flex justify-center">
-                        <div id="answer" style="font-size: 50px; width: 650px; height: 120px; margin-top: 10vh;"
-                            class="flex pemdas-question-frame mt-4 pl-4 pr-4 text-left items-center">
-                            <label class="pr-3">Ans :</label><input
-                                style="margin-right: 50px; width: 300px; border: none; outline: none;"
+                    <div class="container mx-auto flex justify-center ">
+                        <div id="answer" style="font-size: 3vw; min-width: 9vw; max-height: 7vw; margin-top: 10vh; padding-right:3vw;"
+                            class="flex pemdas-question-frame mt-4 pl-4 text-left items-center">
+                            <label style="white-space: nowrap; padding-right:3vw;">Ans :</label><input
+                                style="margin-right: 3vw; min-width: 8vw; max-height: 3vw; border: none; outline: none;"
                                 id="roomcode" type="number" placeholder="_______________">
-                            <button class="ent-color pl-2" style="font-size: 35px;" onclick="">Enter</button>
+                            <button class="ent-color" style="font-size: 2vw; padding-left: 1vw;" onclick="">Enter</button>
                         </div>
                     </div>
                 </div>
@@ -182,35 +217,73 @@
         </div> -->
     </div>
 
-    <div class="container mx-auto game-grid justify-center items-center">
-        <div class="child flex justify-center items-center pl-8">
+    <div class="container mx-auto game-grid justify-evenly items-center max-[1260px]:scale-75 max-[992px]:scale-50  max-[750px]:scale-25">
+        <div class="child flex justify-center items-center pl-8 max-[630px]:hidden">
             <div>
                 <div class="p-14 h-32 mb-8 flex justify-center items-center btn-color">
-                    <span style="font-size: 60px; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
+                    <span style="font-size: 3vw; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
                             id="turn-number">1</span></span>
                 </div>
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
-                            style="font-size: 60px;">X</span></span>
+                    <span style="font-size: 3vw;" id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
+                        >X</span></span>
                 </div>
 
                 <img class="mt-6 mb-6"
                     src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/sep_line_gamepage.png?alt=media&token=8390a896-2b0f-4e10-98f2-acac90a7a154">
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
-                            style="font-size: 60px;">O</span></span>
+                    <span style="font-size: 3vw;" id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
+                        >O</span></span>
                 </div>
 
             </div>
         </div>
 
 
-        <div class="child flex justify-center items-center">
-            <div class="btn-color" style="height: 600px; width: 600px;">
-                <!-- insert OX table here -->
+        <div class="child flex justify-center items-center max-[630px]:flex-col">
 
+
+            <div class=" flex flex-col justify-center items-center min-[630px]:hidden" style="width: 100%;">
+
+
+                <div class="ml-6 mr-6 mb-8 p-4 h-34 flex justify-center items-center text-center btn-color">
+                    <div class="textstroke" style="font-size: 5vw;" id="countdownText">
+                        <span>Wait for another player</span>
+                    </div>
+                </div>
+
+
+                <div class="p-4 mb-4 h-34 flex justify-center items-center text-center btn-color" style="min-width: 20vw;">
+                    <span class="textstroke" style="font-size: 5vw;">Room Code<br>
+                        <span style="font-size: 5vw;" id="Roomcode-number">######</span>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="flex justify-evenly items-center min-[630px]:hidden" style="width: 100%;">
+
+                    <div class=" p-2 h-32 flex justify-center items-center btn-color " style="min-width: 20vw; max-height:15vw;" >
+                        <span style="font-size: 5vw;" id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
+                                >X</span></span>
+                    </div>
+
+                    <div class="m-0 px-4 h-32 flex justify-center items-center btn-color" style="min-width:20vw; max-height:15vw;">
+                        <span style="font-size: 5vw; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
+                                id="turn-number">1</span></span>
+                    </div>
+
+                    <div class=" p-2 h-32 flex justify-center items-center btn-color " style="min-width: 20vw; max-height:15vw;">
+                        <span style="font-size: 5vw;" id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
+                                >O</span></span>
+                    </div>
+            </div>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <div class="btn-color game-frame ">
+                <!-- insert OX table here -->
                 <!-- table with tr -->
                 <!-- <table>
                             <tr>
@@ -251,41 +324,48 @@
 
                 <!-- table with grid -->
                 <div class="game-board" style="color: #2D4059;">
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
+                    <div class="box">x</div>
                 </div>
                 </table>
             </div>
+            <div class="flex text-center items-center justify-center min-[630px]:hidden" style="width: 100%;">
+                <button class="flex justify-center items-center btn-color btn-shadow" style="min-width: 20vw; max-height:15vw;" id="game-back" onclick="backToMenu()">
+                    <!-- insert function here -->
+                    <span class="relative textstroke back-size" style="top: 25px;">BACK TO MENU</span>
+                </button>
+            </div>
         </div>
 
-        <div class="child flex justify-center items-center p-8 w-96 pr-20">
+
+        <div class="child flex justify-center items-center p-8 w-96 pr-20 max-[630px]:hidden">
             <div>
                 <div class="p-4 h-34 mb-4 flex justify-center items-center text-center btn-color w-96">
-                    <span class="textstroke">Room Code<br>
-                        <span style="font-size: 40px;" id="Roomcode-number">######</span>
+                    <span style="font-size: 3vw;" class="textstroke">Room Code<br>
+                        <span style="font-size: 3vw;" id="Roomcode-number">######</span>
                     </span>
                 </div>
 
@@ -296,10 +376,9 @@
                         <span>player</span>
                     </div>
                 </div>
-                <button class="w-96 h-32 flex justify-center items-center btn-color" id="game-back"
-                    onclick="backToMenu()">
+                <button class="hover:opacity-70 w-96 h-32 flex justify-center items-center btn-color btn-shadow" id="game-back" onclick="backToMenu()">
                     <!-- insert function here -->
-                    <span style="font-size: 40px;" class="textstroke">BACK TO MENU</span>
+                    <span style="font-size: 3vw;" class="textstroke">BACK TO MENU</span>
                 </button>
             </div>
         </div>
