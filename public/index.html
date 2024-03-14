@@ -14,19 +14,27 @@
 </head>
 
 <style>
-    .text-size{
+    .text-size {
         font-size: 35px;
     }
-    .inp-color{
+
+    .inp-color {
         width: 384px;
         height: 80px;
     }
-    .login-btn{
+
+    .login-btn {
         width: 384px;
         height: 80px;
     }
+
+    .feedback-text-color {
+        color: #EA5455;
+        font-size: 25px;
+    }
+
     @media all and (max-width:992px) {
-        .back-btn{
+        .back-btn {
             left: 0;
             top: -5px;
             scale: 0.6;
@@ -34,30 +42,38 @@
             margin-left: 0px;
         }
 
-        }
+    }
+
     @media all and (max-width:630px) {
-        .back-btn{
+        .back-btn {
             left: -20px;
             top: -20px;
             scale: 0.4;
             margin-top: 0px;
             margin-left: 0px;
         }
-        .inp-color{
+
+        .inp-color {
             width: 300px;
             height: 50px;
             font-size: 20px;
         }
-        .text-size{
+
+        .text-size {
             font-size: 20px;
         }
-        .login-btn{
+
+        .login-btn {
             border: 5px solid #EA5455;
             width: 200px;
             height: 50px;
         }
-        }
 
+        .feedback-text-color {
+            color: #EA5455;
+            font-size: 15px;
+        }
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -76,16 +92,14 @@
     <!-- input here -->
     <div class="container mx-auto flex justify-center">
         <div>
-            <input id="user_id" class="inp-color mt-12 pl-4 text-size" type="text"
-                placeholder="Username"><br>
+            <input id="user_id" class="inp-color mt-12 pl-4 feedback-text" type="text" placeholder="Username"><br>
             <!-- feedback -->
             <div id="username-feedback" class="invalid-feedback flex items-center p-0 m-0">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Couldn't find your username</span> -->
             </div>
 
-            <input id="password_id" class="inp-color mt-4 pl-4 text-size" type="password"
-                placeholder="Password">
+            <input id="password_id" class="inp-color mt-4 pl-4 feedback-text" type="password" placeholder="Password">
             <!-- feedback -->
             <div id="password-feedback" class="invalid-feedback flex items-center p-0 m-0">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
@@ -101,7 +115,8 @@
     <!-- button here -->
     <div class="container mx-auto justify-center flex">
         <div class="text-center">
-            <button id="login_btn" class="mt-8 flex justify-center items-center btn-color login-btn btn-shadow hover:opacity-70"
+            <button id="login_btn"
+                class="mt-8 flex justify-center items-center btn-color login-btn btn-shadow hover:opacity-70"
                 onclick="signinAccount()">
                 <!-- insert function here -->
 

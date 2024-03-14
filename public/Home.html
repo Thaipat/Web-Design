@@ -46,8 +46,8 @@
     .exit-rating {
         width: 50px;
         height: 50px;
-        right: 5px;
-        top: 10px;
+        right: 20px;
+        top: 20px;
         background-color: #EA5455;
         border: 5px solid #EA5455;
         border-radius: 100px;
@@ -201,7 +201,7 @@
             <!-- uncomment to check pop up -->
 
             <div class="absolute flex justify-center items-center" id="join-room">
-                <div class="absolute flex justify-center items-center z-10"
+                <!-- <div class="absolute flex justify-center items-center z-10"
                     style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
                     <div class="p-14 flex justify-center items-center btn-color join-frame">
                         <div class="relative w-auto h-auto text-center">
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
@@ -250,7 +250,6 @@
                         </div>
                     </div>
                 </div> -->
-
             </div>
             <!-- img for tutorial -->
             <!-- <img style="width: 70vw;" src="https://media.discordapp.net/attachments/986985862631915541/1209050876996751430/image.png?ex=65e58360&is=65d30e60&hm=ff3228e9dd3a5303246a99fee2d976a2e3f0958f1aa05b790adea4fd87b0b77b&=&format=webp&quality=lossless&width=981&height=457"> -->
@@ -264,7 +263,7 @@
                         style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
                         <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
                             <button id="exit_leaderboard"
-                                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-50" onclick=""> x
+                                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick=""> x
                             </button>
                             <div class="text-center textstroke">
                                 <div class="mb-6 max-[630px]:mt-0" >Rating</div>
@@ -344,30 +343,30 @@
                         <!-- insert function here -->
 
                         <img class="img-scale"
-                            src="https://cdn.discordapp.com/attachments/1012002996906885121/1216429407904858174/leaderboard.png?ex=66005b2b&is=65ede62b&hm=e822d773b8fd28637bec5ea7a3362b31612b17e4729c3d5111d6246fcee0a3a7&">
+                            src="leaderboard.png">
                     </button>
                     <button class="hover:opacity-70 btn-height mt-8 flex justify-center items-center btn-color logout-btn btn-shadow"
                         onclick="signOutAccount()">
                         <!-- insert function here -->
 
                         <img class="img-scale"
-                            src="https://cdn.discordapp.com/attachments/1012002996906885121/1216429407653335101/exit.png?ex=66005b2a&is=65ede62a&hm=5784dccb0b5ebbdaf2e17bdb98bfb647186f4ac62676f187a7f51067a735f402&">
+                            src="exit.png">
                     </button>
                 </div>
                 <div class="container mx-auto flex overflow-hidden justify-end pr-8 max-[630px]:justify-center max-[630px]:pr-0" style="width: 100vw;">
                     <button class="hover:opacity-70 relative w-28 h-28 mt-8 flex justify-center items-center round-btn btn-shadow"
-                        onclick="rating()">
+                        onclick="ratings()">
                         <!-- insert function here -->
 
                         <img class="img-scale"
-                            src="https://cdn.discordapp.com/attachments/1012002996906885121/1216429407267197038/star.png?ex=66005b2a&is=65ede62a&hm=f25ec6fd64230030460f565d00946bbe6e7820e8c0fc35bf42728f89cf469056&">
+                            src="star.png">
                     </button>
                     <button class="hover:opacity-70 relative w-28 h-28 mt-8 ml-8 flex justify-center btn-shadow items-center round-btn max-[630px]:ml-0"
                         onclick="tutorial()">
                         <!-- insert function here -->
 
                         <img class="img-scale"
-                            src="https://cdn.discordapp.com/attachments/1012002996906885121/1216429407003217920/tutorial.png?ex=66005b2a&is=65ede62a&hm=be55862313c0c72824b7cf840d22be139039e2b3fb961c0a5a7e9b07807bdcfd&">
+                            src="tutorial.png">
                     </button>
                 </div>
             </div>

@@ -15,10 +15,11 @@
 </head>
 
 <style>
-    .game-frame{
+    .game-frame {
         max-width: 80vw;
-        max-height:80vw;
+        max-height: 80vw;
     }
+
     .child {
         height: 100vh;
     }
@@ -61,10 +62,12 @@
     .text-size {
         font-size: 8rem;
     }
-    .back-size{
+
+    .back-size {
         font-size: 40px;
     }
-    .test-text{
+
+    .test-text {
         font-size: calc(1.5vw + 1.5vh);
     }
 
@@ -81,6 +84,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
     .exit-rating {
         width: 50px;
         height: 50px;
@@ -92,46 +96,93 @@
         font-size: 50px;
         color: white;
     }
+
     .uncheck {
         color: #2D4059;
         -webkit-text-stroke-width: 3px;
         -webkit-text-stroke-color: white;
     }
 
+    .exit-leaderboard {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        top: 20px;
+        background-color: #EA5455;
+        border: 5px solid #EA5455;
+        border-radius: 100px;
+        font-size: 50px;
+        color: white;
+    }
+
+    .fontTimer {
+        font-size: 80px;
+    }
+
     @media all and (max-width:630px) {
-        .game-frame{
+        .game-frame {
             max-width: 83vw;
-            max-height:83vw;
+            max-height: 83vw;
             border-radius: 4vw;
             margin: 5vw 0;
         }
-        .box{
+
+        .box {
             font-size: 7vw;
             border: 1vw solid #EA5455;
         }
+
         .game-grid {
             display: block;
         }
-        .back-size{
+
+        .back-size {
             font-size: 15px;
             height: 70px;
         }
-        .btn-color{
+
+        .btn-color {
             border: 5px solid #EA5455;
         }
-        .game-board{
+
+        .game-board {
             max-width: 80vw;
-            max-height:80vw;
+            max-height: 80vw;
         }
-        .pemdas-question-frame{
+
+        .pemdas-question-frame {
             border: 5px solid #EA5455;
             min-width: 60vw;
             max-height: 50vw;
         }
-        .ent-color{
+
+        .ent-color {
             border: 2px solid #EA5455;
         }
+
+        .fontTimer {
+            font-size: 7vw;
         }
+    }
+
+    @media all and (max-width:750px) {
+        .game-board {
+            max-width: 80vw;
+            max-height: 80vw;
+        }
+
+        .box {
+            font-size: 7vw;
+            border: 1vw solid #EA5455;
+        }
+
+        .game-frame {
+            max-width: 83vw;
+            max-height: 83vw;
+            border-radius: 4vw;
+            margin: 5vw 0;
+        }
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -139,15 +190,14 @@
     <div id="winlose">
         <!-- <div class="absolute flex justify-center items-center z-10"
             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-            <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 60vw;">
+            <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 80vh;">
                 <div class="relative w-auto h-auto text-center">
                     <div class="textstroke" style="font-size: 8vw;">
                         You<br>
                         <span id="player-winlose">XXX</span>
                     </div>
                     <div class="flex justify-center">
-                        <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;" onclick="">
-
+                        <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;margin-top: 10vh;" onclick="goBackToMenu()">
                             <span class="textstroke test-text">BACK TO MENU</span>
                         </button>
                     </div>
@@ -161,8 +211,8 @@
             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
             <div class="p-14 flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
                 <div class="text-center">
-                    <span class="textstroke" style="font-size:6vw;">Finish the PEMDAS !</span>
-                    <div class="flex justify-center items-center" style="margin-top: 10vh;">
+                    <span class="textstroke" style="font-size:6vw;">Finish the PEMDAS!</span>
+                    <div class="flex justify-center items-center" style="margin-top: 3vh;">
                         <div class="pemdas-question-frame p-4 flex justify-center items-center text-center">
                             <span id="pemdas-question" class="test-text">here is the question</span>
                         </div>
@@ -180,25 +230,17 @@
             </div>
         </div> -->
     </div>
-
     <div class="absolute flex justify-center items-center" id="rating">
         <!-- <div class="relative flex justify-center items-center z-10"
             style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-            <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-                <button id="exit_rating"
-                    class="absolute exit-rating flex justify-center items-center text-center pb-3"
+            <div
+                class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+                <button id="exit_leaderboard"
+                    class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75"
                     onclick="closeRating()"> x
                 </button>
-                <div class="text-center textstroke">
-                    <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
-                    <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
-                        <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
-                        <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
-                        <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
-                        <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
-                        <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
-                    </div>
-
+                <div class="text-center textstroke" style="display: flex;align-items: center;">
+                    <div class="mb-6 max-[630px]:mt-0">Thank you</div>
                 </div>
             </div>
         </div> -->
@@ -209,7 +251,7 @@
             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
             <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
                 <div class="relative w-auto h-auto text-center">
-                    <div class="textstroke text-size" id="player-name-turn">
+                    <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
                         Player test1's answer is correct!
                     </div>
                 </div>
@@ -217,7 +259,8 @@
         </div> -->
     </div>
 
-    <div class="container mx-auto game-grid justify-evenly items-center max-[1260px]:scale-75 max-[992px]:scale-50  max-[750px]:scale-25">
+    <div
+        class="container mx-auto game-grid justify-evenly items-center max-[1260px]:scale-75 max-[992px]:scale-50  max-[750px]:scale-25">
         <div class="child flex justify-center items-center pl-8 max-[630px]:hidden">
             <div>
                 <div class="p-14 h-32 mb-8 flex justify-center items-center btn-color">
@@ -226,16 +269,16 @@
                 </div>
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span style="font-size: 3vw;" id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
-                        >X</span></span>
+                    <span style="font-size: 3vw;" id="player-1-text" class="textstroke"><span
+                            id="PlayerName1-sign">Name</span> : <span>X</span></span>
                 </div>
 
                 <img class="mt-6 mb-6"
-                    src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/sep_line_gamepage.png?alt=media&token=8390a896-2b0f-4e10-98f2-acac90a7a154">
+                    src="sep_line_gamepage.png">
 
                 <div class="p-4 h-32 flex justify-center items-center btn-color">
-                    <span style="font-size: 3vw;" id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
-                        >O</span></span>
+                    <span style="font-size: 3vw;" id="player-2-text" class="textstroke"><span
+                            id="PlayerName2-sign">Name</span> : <span>O</span></span>
                 </div>
 
             </div>
@@ -245,7 +288,7 @@
         <div class="child flex justify-center items-center max-[630px]:flex-col">
 
 
-            <div class=" flex flex-col justify-center items-center min-[630px]:hidden" style="width: 100%;">
+            <div class=" flex justify-center items-center min-[630px]:hidden" style="width: 100%;">
 
 
                 <div class="ml-6 mr-6 mb-8 p-4 h-34 flex justify-center items-center text-center btn-color">
@@ -255,7 +298,8 @@
                 </div>
 
 
-                <div class="p-4 mb-4 h-34 flex justify-center items-center text-center btn-color" style="min-width: 20vw;">
+                <div class="p-4 mb-4 h-34 flex justify-center items-center text-center btn-color"
+                    style="min-width: 20vw;">
                     <span class="textstroke" style="font-size: 5vw;">Room Code<br>
                         <span style="font-size: 5vw;" id="Roomcode-number">######</span>
                     </span>
@@ -265,22 +309,25 @@
 
             <div class="flex justify-evenly items-center min-[630px]:hidden" style="width: 100%;">
 
-                    <div class=" p-2 h-32 flex justify-center items-center btn-color " style="min-width: 20vw; max-height:15vw;" >
-                        <span style="font-size: 5vw;" id="player-1-text" class="textstroke"><span id="PlayerName1-sign">Name</span> : <span
-                                >X</span></span>
-                    </div>
+                <div class=" p-2 h-32 flex justify-center items-center btn-color "
+                    style="min-width: 20vw; max-height:15vw;">
+                    <span style="font-size: 5vw;" id="player-1-text" class="textstroke"><span
+                            id="PlayerName1-sign">Name</span> : <span>X</span></span>
+                </div>
 
-                    <div class="m-0 px-4 h-32 flex justify-center items-center btn-color" style="min-width:20vw; max-height:15vw;">
-                        <span style="font-size: 5vw; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
-                                id="turn-number">1</span></span>
-                    </div>
+                <div class="m-0 px-4 h-32 flex justify-center items-center btn-color"
+                    style="min-width:20vw; max-height:15vw;">
+                    <span style="font-size: 5vw; white-space: nowrap;" id="turn-text" class="textstroke">Turn : <span
+                            id="turn-number">1</span></span>
+                </div>
 
-                    <div class=" p-2 h-32 flex justify-center items-center btn-color " style="min-width: 20vw; max-height:15vw;">
-                        <span style="font-size: 5vw;" id="player-2-text" class="textstroke"><span id="PlayerName2-sign">Name</span> : <span
-                                >O</span></span>
-                    </div>
+                <div class=" p-2 h-32 flex justify-center items-center btn-color "
+                    style="min-width: 20vw; max-height:15vw;">
+                    <span style="font-size: 5vw;" id="player-2-text" class="textstroke"><span
+                            id="PlayerName2-sign">Name</span> : <span>O</span></span>
+                </div>
             </div>
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
             <div class="btn-color game-frame ">
                 <!-- insert OX table here -->
@@ -324,38 +371,39 @@
 
                 <!-- table with grid -->
                 <div class="game-board" style="color: #2D4059;">
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
-                    <div class="box">x</div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
                 </div>
                 </table>
             </div>
             <div class="flex text-center items-center justify-center min-[630px]:hidden" style="width: 100%;">
-                <button class="flex justify-center items-center btn-color btn-shadow" style="min-width: 20vw; max-height:15vw;" id="game-back" onclick="backToMenu()">
+                <button class="flex justify-center items-center btn-color btn-shadow"
+                    style="min-width: 20vw; max-height:15vw;" id="game-back" onclick="backToMenu()">
                     <!-- insert function here -->
-                    <span class="relative textstroke back-size" style="top: 25px;">BACK TO MENU</span>
+                    <span class="relative textstroke back-size" style="top: 25px; font-size: 1.5vw;" id="game-back">BACK TO MENU</span>
                 </button>
             </div>
         </div>
@@ -376,9 +424,10 @@
                         <span>player</span>
                     </div>
                 </div>
-                <button class="hover:opacity-70 w-96 h-32 flex justify-center items-center btn-color btn-shadow" id="game-back" onclick="backToMenu()">
+                <button class="hover:opacity-70 w-96 h-32 flex justify-center items-center btn-color btn-shadow"
+                    id="game-back" onclick="backToMenu()">
                     <!-- insert function here -->
-                    <span style="font-size: 3vw;" class="textstroke">BACK TO MENU</span>
+                    <span style="font-size: 1.5vw;" class="textstroke" id="game-back">BACK TO MENU</span>
                 </button>
             </div>
         </div>

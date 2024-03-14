@@ -1,19 +1,20 @@
 let joinPopup = `<div class="absolute flex justify-center items-center z-10"
 style="width:100%; height:100%; background-color: rgba(1,0,0,0.5);">
-<div class="p-14 flex justify-center items-center btn-color" style="width: 800px; height: 275px;">
+<div class="p-14 flex justify-center items-center btn-color join-frame">
     <div class="relative w-auto h-auto text-center">
 
-        <button id="exit_btn"
-            class="absolute exit-btn flex justify-center items-center text-center pb-3" onclick="closeJoinRoom()"> x
+        <button id="exit_btn" style="right: 0;"
+            class="absolute exit-btn flex justify-center items-center text-center pb-3 close-btn" onclick="closeJoinRoom()"> x
         </button>
 
         <div class="textstroke">Join Room</div>
-        <div id="roomcode" style="font-size: 50px; width: auto; height: 120px;"
-            class="flex inp-color mt-4 pl-4 pr-4 text-left items-center">
+        <div id="roomcode"
+            class="flex inp-color mt-4 pl-4 pr-4 text-left items-center inp-font">
             <label class="pr-3">Code :</label><input
-                style="margin-right: 50px; width: 180px; border: none; outline: none;" maxlength="6"
+                class="join-inp"
+                maxlength="6"
                 id="roomcodeinput" type="text" placeholder="######">
-            <button class="ent-color pl-2 pr-2" style="font-size: 35px;" onclick="joinRoom()">Enter</button>
+            <button class="ent-color pl-2 pr-2 text-size" onclick="joinRoom()">Enter</button>
         </div>
     </div>
 </div>
@@ -92,7 +93,8 @@ function joinRoom() {
                         let username = data.val().username
                         if (username == currentUser.displayName) {
                             accountRef.child(id).update({
-                                roomCode: roomCode
+                                roomCode: roomCode,
+                                isCount: false
                             }).then(function () {
                                 gameRef.child(gameData).update({
                                     user2: currentUser.displayName
@@ -177,34 +179,34 @@ function createRoom() {
 
 }
 
-tutorialImg = [`https://media.discordapp.net/attachments/986985862631915541/1209050641763278869/image.png?ex=65f7f828&is=65e58328&hm=0d74d9885a57bd7293a010a079791a111f9857835d53c39676888635d32849f0&=&format=webp&quality=lossless&width=982&height=451`, `https://cdn.discordapp.com/attachments/986985862631915541/1209050876996751430/image.png?ex=65f7f860&is=65e58360&hm=08184d6fbce556026f9c89161f0ca4b6b8180e7c700228d79bd5b9b46efe5e4c&`, `https://cdn.discordapp.com/attachments/986985862631915541/1209050945049067560/image.png?ex=65f7f870&is=65e58370&hm=ce064b9626b35dc9606d1e5d002672faf7a59846bd62106aa9f2b558947260b7&`, `https://cdn.discordapp.com/attachments/986985862631915541/1209051011679912017/image.png?ex=65f7f880&is=65e58380&hm=061b75e3d25522f1ed959b622ab1276148254ed241e05a6cc78c8c02f1e3df31&`, `https://cdn.discordapp.com/attachments/986985862631915541/1209051065371336704/image.png?ex=65f7f88d&is=65e5838d&hm=3760ab0b801057741bf9be8c132175c07633982fdbc6dd907f842ce7d879c6a2&`, `https://cdn.discordapp.com/attachments/986985862631915541/1209051140205842502/image.png?ex=65f7f89e&is=65e5839e&hm=e7904e9931b851d4760f8c53f7e5ae017978d8ff2971eee0ffa7eae82d579c76&`]
+tutorialImg = [`tutorial-1.png`, `tutorial-2.png`, `tutorial-3.png`, `tutorial-4.png`, `tutorial-5.png`, `tutorial-6.png`]
 
 let tutorialImgCount = 0
 
 function tutorial() {
-    document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
-    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
-        <div class="text-center">
-                <div class="flex justify-center mt-4">
-                    <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
+    document.querySelector("#tutorial").innerHTML = `
+    <div class="relative flex justify-center items-center z-10"
+        style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+        <div class="relative flex justify-center items-center btn-color tutorial-size">
+            <div class="text-center">
+                    <div class="flex justify-center mt-4 max-[630px]:mt-0">
+                        <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
+                    </div>
+                <div class="relative flex justify-center items-center m-4 max-[630px]:mt-6 btn-container">
+                    <button class="tutorial-btn flex justify-center items-center btn-color" onclick="closeTutorial()">
+                        <span class="textstroke text-size">Close</span>
+                    </button>
+                    <div class="tutorial-btn flex justify-center items-center btn-color showpage">
+                        <span class="textstroke text-size">
+                            <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
+                        </span>
+                    </div>
+                    <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
+                        <span class="textstroke relative text-size">Next</span>
+                    </button>
                 </div>
-            <div class="relative flex justify-center items-center m-4">
-                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="closeTutorial()">
-                    <span class="textstroke" style="font-size: 35px;">Close</span>
-                </button>
-                <div class="tutorial-btn flex justify-center items-center btn-color"
-                style="margin-left: 10vw; margin-right: 10vw;">
-                    <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
-                    </span>
-                </div>
-                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
-                    <span class="textstroke relative" style="font-size: 35px;">Next</span>
-                </button>
             </div>
         </div>
-    </div>
     </div>`
 }
 
@@ -212,97 +214,93 @@ function nextTutorial() {
     tutorialImgCount += 1
     tutorialImgCount == 5 ? document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+    <div class="relative flex justify-center items-center btn-color tutorial-size">
         <div class="text-center">
-                <div class="flex justify-center mt-4">
+                <div class="flex justify-center mt-4 max-[630px]:mt-0">
                     <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
                 </div>
-            <div class="relative flex justify-center items-center m-4">
+            <div class="relative flex justify-center items-center m-4 max-[630px]:mt-6 btn-container">
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="backTutorial()">
-                    <span class="textstroke" style="font-size: 35px;">Back</span>
+                    <span class="textstroke text-size">Back</span>
                 </button>
-                <div class="tutorial-btn flex justify-center items-center btn-color"
-                style="margin-left: 10vw; margin-right: 10vw;">
-                    <span class="textstroke" style="font-size: 35px;">
+                <div class="tutorial-btn flex justify-center items-center btn-color showpage">
+                    <span class="textstroke text-size">
                         <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="closeTutorial()">
-                    <span class="textstroke relative" style="font-size: 35px;">Close</span>
+                    <span class="textstroke relative text-size">Close</span>
                 </button>
             </div>
         </div>
     </div>
-    </div>` : document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
-    style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
-        <div class="text-center">
-                <div class="flex justify-center mt-4">
-                    <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
-                </div>
-            <div class="relative flex justify-center items-center m-4">
-                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="backTutorial()">
-                    <span class="textstroke" style="font-size: 35px;">Back</span>
-                </button>
-                <div class="tutorial-btn flex justify-center items-center btn-color"
-                style="margin-left: 10vw; margin-right: 10vw;">
-                    <span class="textstroke" style="font-size: 35px;">
-                        <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
-                    </span>
-                </div>
-                <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
-                    <span class="textstroke relative" style="font-size: 35px;">Next</span>
-                </button>
+</div>` : document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
+style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
+<div class="relative flex justify-center items-center btn-color tutorial-size">
+    <div class="text-center">
+            <div class="flex justify-center mt-4 max-[630px]:mt-0">
+                <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
             </div>
+        <div class="relative flex justify-center items-center m-4 max-[630px]:mt-6 btn-container">
+            <button class="tutorial-btn flex justify-center items-center btn-color" onclick="backTutorial()">
+                <span class="textstroke text-size">Back</span>
+            </button>
+            <div class="tutorial-btn flex justify-center items-center btn-color showpage">
+                <span class="textstroke text-size">
+                    <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
+                </span>
+            </div>
+            <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
+                <span class="textstroke relative text-size">Next</span>
+            </button>
         </div>
     </div>
-    </div>`
+</div>
+</div>`
 }
 
 function backTutorial() {
     tutorialImgCount -= 1
     tutorialImgCount == 0 ? document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+    <div class="relative flex justify-center items-center btn-color tutorial-size">
         <div class="text-center">
-                <div class="flex justify-center mt-4">
+                <div class="flex justify-center mt-4 max-[630px]:mt-0">
                     <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
                 </div>
-            <div class="relative flex justify-center items-center m-4">
+            <div class="relative flex justify-center items-center m-4 max-[630px]:mt-6 btn-container">
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="closeTutorial()">
-                    <span class="textstroke" style="font-size: 35px;">close</span>
+                    <span class="textstroke text-size">Close</span>
                 </button>
-                <div class="tutorial-btn flex justify-center items-center btn-color"
-                style="margin-left: 10vw; margin-right: 10vw;">
-                    <span class="textstroke" style="font-size: 35px;">
+                <div class="tutorial-btn flex justify-center items-center btn-color showpage">
+                    <span class="textstroke text-size">
                         <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
-                    <span class="textstroke relative" style="font-size: 35px;">Next</span>
+                    <span class="textstroke relative text-size">Next</span>
                 </button>
             </div>
         </div>
     </div>
     </div>` : document.querySelector("#tutorial").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
+    <div class="relative flex justify-center items-center btn-color tutorial-size">
         <div class="text-center">
-                <div class="flex justify-center mt-4">
+                <div class="flex justify-center mt-4 max-[630px]:mt-0">
                     <img style="width: 70vw;" src="${tutorialImg[tutorialImgCount]}">
                 </div>
-            <div class="relative flex justify-center items-center m-4">
+            <div class="relative flex justify-center items-center m-4 max-[630px]:mt-6 btn-container">
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="backTutorial()">
-                    <span class="textstroke" style="font-size: 35px;">Back</span>
+                    <span class="textstroke text-size">Back</span>
                 </button>
-                <div class="tutorial-btn flex justify-center items-center btn-color"
-                style="margin-left: 10vw; margin-right: 10vw;">
-                    <span class="textstroke" style="font-size: 35px;">
+                <div class="tutorial-btn flex justify-center items-center btn-color showpage">
+                    <span class="textstroke text-size">
                         <span id="tutorial-page">${tutorialImgCount + 1}</span>/6
                     </span>
                 </div>
                 <button class="tutorial-btn flex justify-center items-center btn-color" onclick="nextTutorial()">
-                    <span class="textstroke relative" style="font-size: 35px;">Next</span>
+                    <span class="textstroke relative text-size">Next</span>
                 </button>
             </div>
         </div>
@@ -318,7 +316,7 @@ function closeTutorial() {
 function leaderBoard() {
     document.querySelector("#leaderboard").innerHTML = `
     <div class="relative flex justify-center items-center z-10" style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-        <div class="relative flex justify-center btn-color p-10" style="width: 40vw; height: 90vh;">
+        <div class="relative flex justify-center btn-color p-10 ldb-frame">
             <button id="exit_leaderboard"
                 class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeLeaderBoard()"> x
             </button>
@@ -331,6 +329,11 @@ function leaderBoard() {
                             <div>Name</div>
                             <div class="container flex justify-end pr-3"><span>Win</span></div>
                         </div>
+
+                        <div class="flex justify-start ml-6 max-[630px]:ml-3" style="font-size: calc(1.5vw + 1.5vh); height:fit-content; width:100%;">
+                            
+                        </div>
+
                         <div class="overflow-scroll" style="height:55vh; scrollbar-width: none; scrollbar-height: none;" id="leaderList">
 
                         </div>
@@ -361,26 +364,26 @@ function closeLeaderBoard() {
     document.querySelector("#leaderboard").innerHTML = ""
 }
 
-function rating() {
-    document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
+function ratings() {
+    document.querySelector("#rating").innerHTML =
+        `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-        <button id="exit_leaderboard"
-            class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
-        </button>
-        <div class="text-center textstroke">
-            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
-            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
-                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+        <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+            <button id="exit_leaderboard"
+                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRatings()"> x
+            </button>
+            <div class="text-center textstroke">
+                <div class="mb-6 max-[630px]:mt-0" >Rating</div>
+                <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center max-[630px]:scale-75 max-[630px]:mt-0">
+                    <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+                </div>
             </div>
-
         </div>
-    </div>
-</div>`
+    </div>`
     let allStars = document.querySelectorAll(".fa-star")
     allStars.forEach(function (star) {
         star.addEventListener("click", clickedStar)
@@ -468,12 +471,11 @@ function clickedStar(event) {
         document.querySelector("#rating").innerHTML = `
         <div class="relative flex justify-center items-center z-10"
         style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-            <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-                <button id="exit_leaderboard"
-                    class="absolute exit-leaderboard flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
+            <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+                <button id="exit_leaderboard" class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRatings()"> x
                 </button>
                 <div class="text-center textstroke" style="display: flex;align-items: center;">
-                    <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                    <div class="mb-6 max-[630px]:mt-0">Thank you</div>
                 </div>
             </div>
         </div>`
@@ -482,19 +484,19 @@ function clickedStar(event) {
         accountRef.once("value", (snapshot) => {
             snapshot.forEach((data) => {
                 let rate = data.val().rate
-                if(rate != undefined){
+                if (rate != undefined) {
                     sumRate += rate
                     rateCount += 1
                 }
             })
-        }).then(function(){
+        }).then(function () {
             ratingRef.update({
-                gameRating: parseFloat(sumRate/rateCount).toFixed(1)
+                gameRating: parseFloat(sumRate / rateCount).toFixed(1)
             })
         })
     })
 }
 
-function closeRating() {
+function closeRatings() {
     document.querySelector("#rating").innerHTML = ""
 }

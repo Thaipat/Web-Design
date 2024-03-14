@@ -9,7 +9,7 @@ boxes.forEach(function (box) {
 
 const countDownText = `<span>PEMDAS</span><br>
 <span>is coming in</span><br>
-<div style="font-size: 80px;">
+<div class="fontTimer">
     <span id="game-timer">5</span><span> secs</span>
 </div>`
 
@@ -21,19 +21,19 @@ const pemdasPopup = `<div class="absolute flex justify-center items-center z-10"
 style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
 <div class="p-14 flex justify-center items-center btn-color" style="width: 70vw; height: 90vh;">
     <div class="text-center">
-        <span class="textstroke">Finish the PEMDAS !</span>
-        <div class="flex justify-center items-center" style="margin-top: 10vh;">
+        <span class="textstroke" style="font-size:6vw;">Finish the PEMDAS!</span>
+        <div class="flex justify-center items-center" style="margin-top: 3vh;">
             <div class="pemdas-question-frame p-4 flex justify-center items-center text-center">
                 <span id="pemdas-question" class="test-text">here is the question</span>
             </div>
         </div>
-        <div class="container mx-auto flex justify-center">
-            <div id="answer" style="font-size: 50px; width: 650px; height: 120px; margin-top: 10vh;"
-                class="flex pemdas-question-frame mt-4 pl-4 pr-4 text-left items-center">
-                <label class="pr-3">Ans :</label><input
-                    style="margin-right: 50px; width: 300px; border: none; outline: none;"
+        <div class="container mx-auto flex justify-center ">
+            <div id="answer" style="font-size: 3vw; min-width: 9vw; max-height: 7vw; margin-top: 10vh; padding-right:3vw;"
+                class="flex pemdas-question-frame mt-4 pl-4 text-left items-center">
+                <label style="white-space: nowrap; padding-right:3vw;">Ans :</label><input
+                    style="margin-right: 3vw; min-width: 8vw; max-height: 3vw; border: none; outline: none;"
                     id="pemdas-ans" type="number" placeholder="_______________">
-                <button class="ent-color pl-2" style="font-size: 35px;" onclick="submitAns()">Enter</button>
+                <button class="ent-color" style="font-size: 2vw; padding-left: 1vw;" onclick="submitAns()">Enter</button>
             </div>
         </div>
     </div>
@@ -115,8 +115,7 @@ gameRef.on("value", (snapshot) => {
     getGameInfo(snapshot);
 })
 
-let counDownNum = 5
-let isCount = false
+let countDownNum = 5
 let isPemdas = false
 let gameTurnNum = 1;
 
@@ -131,7 +130,10 @@ function getGameInfo(gameSnapshot) {
             let orderScore = data.val().orderScore
             let rate = data.val().rate
             if (username == currentUser.displayName) {
-                document.querySelector("#Roomcode-number") == null ? document.querySelector("#Roomcode-number") : document.querySelector("#Roomcode-number").innerText = userRoomCode
+                let roomCodesSelected = document.querySelectorAll("#Roomcode-number")
+                roomCodesSelected.forEach((roomCodeSelected) => {
+                    roomCodeSelected.innerText = userRoomCode
+                })
                 gameSnapshot.forEach((data) => {
                     let gameid = data.key
                     let gameRoomCode = data.val().roomCode
@@ -145,26 +147,48 @@ function getGameInfo(gameSnapshot) {
                     let table = data.val().table
                     let userWin = data.val().userWin
                     let gameTurn = data.val().gameTurn
+                    let isCount = data.val().isCount
                     if (user2 == undefined) {
-                        document.querySelector("#PlayerName1-sign").innerText = user1
-                        document.querySelector("#PlayerName2-sign").innerText = "..."
-                        document.querySelector("#countdownText").innerHTML = waitingText
-                        document.querySelector("#game-back").style.display = "flex"
+                        document.querySelectorAll("#PlayerName1-sign").forEach((player1Name) => {
+                            player1Name.innerText = user1
+                        })
+                        document.querySelectorAll("#PlayerName2-sign").forEach((player2Name) => {
+                            player2Name.innerText = "..."
+                        })
+                        document.querySelectorAll("#countdownText").forEach((text) => {
+                            text.innerHTML = waitingText
+                        })
+                        document.querySelectorAll("#game-back").forEach((gameBack) => {
+                            gameBack.style.display = "flex"
+                        })
                     } else if (userRoomCode == gameRoomCode) {
-                        document.querySelector("#PlayerName1-sign").innerText = user1
-                        document.querySelector("#PlayerName2-sign").innerText = user2
-                        document.querySelector("#countdownText").innerHTML = countDownText
-                        document.querySelector("#game-back").style.display = "none"
-                        document.querySelector("#game-timer").innerText = timer
+                        document.querySelectorAll("#PlayerName1-sign").forEach((player1Name) => {
+                            player1Name.innerText = user1
+                        })
+                        document.querySelectorAll("#PlayerName2-sign").forEach((player2Name) => {
+                            player2Name.innerText = user2
+                        })
+                        document.querySelectorAll("#countdownText").forEach((text) => {
+                            text.innerHTML = countDownText
+                        })
+                        document.querySelectorAll("#game-back").forEach((gameBack) => {
+                            gameBack.style.display = "none"
+                        })
+                        document.querySelectorAll("#game-timer").forEach((gameTimer) => {
+                            gameTimer.innerText = timer
+                        })
                         if (!isCount) {
-                            isCount = true
-                            gameCountDown(gameid)
+                            gameRef.child(gameid).update({
+                                isCount: true
+                            }).then(gameCountDown(gameid))
                         }
+                        console.log(timer, isPemdas)
                         if (timer == 0 && isPemdas == false) {
                             document.querySelector("#pemdasgame-page").innerHTML = pemdasPopup
                             document.querySelector("#pemdas-question").innerText = gameQuizText
                             gameTurnNum += 1
                             playerTurn = ""
+                            isPemdas = true
                             console.log(gameQuizText)
                             console.log("Ans : ", gameQuizAns)
                         } else if (timer == 0 && isPemdas == true) {
@@ -172,17 +196,18 @@ function getGameInfo(gameSnapshot) {
                             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
                             <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
                                 <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size" id="player-name-turn">
-                                        No one's answer is correct!
+                                    <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
+                                        No one answered correctly!
                                     </div>
                                 </div>
                             </div>
                         </div>`
                             document.querySelector("#pemdasgame-page").innerHTML = ""
+                            isPemdas = false
                         } else if (timer == 5 && isPemdas == false) {
                             document.querySelector("#player-turn").innerHTML = ""
                         } else if ((user1Ans == gameQuizAns || user2Ans == gameQuizAns) && isPemdas == true) {
-                            counDownNum = 6
+                            countDownNum = 6
                             isPemdas = false
                             document.querySelector("#pemdasgame-page").innerHTML = ""
                             user1Ans == gameQuizAns ? playerTurn = user1 : playerTurn = user2
@@ -190,25 +215,25 @@ function getGameInfo(gameSnapshot) {
                             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
                             <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
                                 <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size" id="player-name-turn">
+                                    <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
                                         Player ${playerTurn}'s answer is correct!
                                     </div>
                                 </div>
                             </div>
-                            </div>`
+                        </div>`
                         } else if (user1Ans != quizAns && user1Ans != 1000 && user2Ans != quizAns && user2Ans != 1000 && isPemdas == true) {
-                            counDownNum = 6
+                            countDownNum = 6
                             isPemdas = false
                             document.querySelector("#player-turn").innerHTML = `<div class="absolute flex justify-center items-center z-10"
                             style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                                <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
-                                    <div class="relative w-auto h-auto text-center">
-                                        <div class="textstroke text-size" id="player-name-turn">
-                                            No one's answer is correct!
-                                        </div>
+                            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                                <div class="relative w-auto h-auto text-center">
+                                    <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
+                                        No one answered correctly!
                                     </div>
                                 </div>
-                            </div>`
+                            </div>
+                        </div>`
                         }
                         table.forEach((value, index) => {
                             if (value == "o") {
@@ -229,15 +254,15 @@ function getGameInfo(gameSnapshot) {
                             else {
                                 document.querySelector("#winlose").innerHTML = `
                                 <div class="absolute flex justify-center items-center z-10"
-                                style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                                    <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                                    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                                    <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 80vh;">
                                         <div class="relative w-auto h-auto text-center">
-                                            <div class="textstroke text-size">
+                                            <div class="textstroke" style="font-size: 8vw;">
                                                 You<br>
                                                 <span id="player-winlose">Lose</span>
                                             </div>
                                             <div class="flex justify-center">
-                                                <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                                                <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;margin-top: 10vh;" onclick="goBackToMenu()">
                                                     <span class="textstroke test-text">BACK TO MENU</span>
                                                 </button>
                                             </div>
@@ -251,7 +276,9 @@ function getGameInfo(gameSnapshot) {
                                 orderScore: orderScore - 1,
                             })
                         }
-                        document.querySelector("#turn-number").innerText = gameTurn
+                        document.querySelectorAll("#turn-number").forEach((turnNumber) => {
+                            turnNumber.innerText = gameTurn
+                        })
                     }
                 })
             }
@@ -262,23 +289,21 @@ function getGameInfo(gameSnapshot) {
 function gameCountDown(gameid) {
     setInterval(function () {
         if (isGameEnd == false) {
-            if (counDownNum >= 0) {
+            if (countDownNum >= 0) {
                 gameRef.child(gameid).update({
-                    timer: counDownNum
+                    timer: countDownNum
                 }).then(function () {
-                    counDownNum -= 1
+                    countDownNum -= 1
                 })
-            } else if (counDownNum == -1 && isPemdas == true) {
-                isPemdas = false
-                counDownNum = 6
-            } else if (counDownNum == -1 && isPemdas == false) {
-                isPemdas = true
-                counDownNum = 15
+            } else if (countDownNum == -1 && isPemdas == true) {
+                countDownNum = 15
+            } else if (countDownNum == -1 && isPemdas == false) {
+                countDownNum = 6
             }
-            if (counDownNum == 1 && isPemdas == false) {
+            if (countDownNum == 1 && isPemdas == false) {
                 randomQuiz(gameid)
                 gameRef.child(gameid).update({
-                    timer: counDownNum,
+                    timer: countDownNum,
                     user1Ans: 1000,
                     user2Ans: 1000,
                     gameTurn: gameTurnNum
@@ -330,15 +355,15 @@ function submitAns() {
                 }).then(function () {
                     if (user1Ans != quizAns) {
                         document.querySelector("#player-turn").innerHTML = `<div class="absolute flex justify-center items-center z-10"
-                            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
-                                <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size" id="player-name-turn">
+                        style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                            <div class="relative w-auto h-auto text-center">
+                                <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
                                     Your answer is not correct!
-                                    </div>
                                 </div>
                             </div>
-                        </div>`
+                        </div>
+                    </div>`
                         document.querySelector("#pemdasgame-page").innerHTML = ""
                     }
                 })
@@ -348,15 +373,15 @@ function submitAns() {
                 }).then(function () {
                     if (user2Ans != quizAns) {
                         document.querySelector("#player-turn").innerHTML = `<div class="absolute flex justify-center items-center z-10"
-                            style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                            <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
-                                <div class="relative w-auto h-auto text-center">
-                                    <div class="textstroke text-size" id="player-name-turn">
+                        style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                            <div class="relative w-auto h-auto text-center">
+                                <div class="textstroke text-size" id="player-name-turn" style="display: flex;font-size: 5vw; height: 80vh; align-items: center;">
                                     Your answer is not correct!
-                                    </div>
                                 </div>
                             </div>
-                        </div>`
+                        </div>
+                    </div>`
                         document.querySelector("#pemdasgame-page").innerHTML = ""
                     }
                 })
@@ -465,15 +490,15 @@ function clickedBox(event) {
                                                 else {
                                                     document.querySelector("#winlose").innerHTML = `
                                                     <div class="absolute flex justify-center items-center z-10"
-                                                    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-                                                        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+                                                        style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+                                                        <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 80vh;">
                                                             <div class="relative w-auto h-auto text-center">
-                                                                <div class="textstroke text-size">
+                                                                <div class="textstroke" style="font-size: 8vw;">
                                                                     You<br>
                                                                     <span id="player-winlose">Win</span>
                                                                 </div>
                                                                 <div class="flex justify-center">
-                                                                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                                                                    <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;margin-top: 10vh;" onclick="goBackToMenu()">
                                                                         <span class="textstroke test-text">BACK TO MENU</span>
                                                                     </button>
                                                                 </div>
@@ -497,23 +522,22 @@ function clickedBox(event) {
 function ratingWin() {
     document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-        <button id="exit_rating"
-            class="absolute exit-rating flex justify-center items-center text-center pb-3"
-            onclick="closeRatingWin()"> x
-        </button>
-        <div class="text-center textstroke">
-            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
-            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
-                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+        <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+            <button id="exit_leaderboard"
+                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRatingWin()"> x
+            </button>
+            <div class="text-center textstroke">
+                <div class="mb-6 max-[630px]:mt-0" >Rating</div>
+                <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center max-[630px]:scale-75 max-[630px]:mt-0">
+                    <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+                </div>
             </div>
         </div>
-    </div>
-</div>`
+    </div>`
     let allStars = document.querySelectorAll(".fa-star")
     allStars.forEach(function (star) {
         star.addEventListener("click", clickedStar)
@@ -523,26 +547,25 @@ function ratingWin() {
 function rating() {
     document.querySelector("#rating").innerHTML = `<div class="relative flex justify-center items-center z-10"
     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-    <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-        <button id="exit_rating"
-            class="absolute exit-rating flex justify-center items-center text-center pb-3"
-            onclick="closeRating()"> x
-        </button>
-        <div class="text-center textstroke">
-            <div style="font-size: calc(2vw + 2vh); margin-bottom:20px;">Rating</div>
-            <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center">
-                <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
-                <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+        <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+            <button id="exit_leaderboard"
+                class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRating()"> x
+            </button>
+            <div class="text-center textstroke">
+                <div class="mb-6 max-[630px]:mt-0" >Rating</div>
+                <div style="font-size: 50px;" class="flex mt-4 pl-4 pr-4 text-left items-center max-[630px]:scale-75 max-[630px]:mt-0">
+                    <span class="fa fa-star uncheck" id="star1" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star2" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star3" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star4" onmouseover="hoverStar(this)"></span>
+                    <span class="fa fa-star uncheck" id="star5" onmouseover="hoverStar(this)"></span>
+                </div>
             </div>
         </div>
-    </div>
-</div>`
+    </div>`
     let allStars = document.querySelectorAll(".fa-star")
     allStars.forEach(function (star) {
-        star.addEventListener("click", clickedStar)
+        star.addEventListener("click", clickedStars)
     })
 }
 
@@ -586,7 +609,7 @@ function hoverStar(event) {
     }
 }
 
-function clickedStar(event) {
+function clickedStars(event) {
     document.querySelector("#rating").innerHTML = ""
     accountRef.once("value", (snapshot) => {
         snapshot.forEach((data) => {
@@ -632,12 +655,11 @@ function clickedStar(event) {
                     document.querySelector("#rating").innerHTML = `
                     <div class="relative flex justify-center items-center z-10"
                     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-                        <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-                            <button id="exit_rating"
-                                class="absolute exit-rating flex justify-center items-center text-center pb-3" onclick="closeRatingWin()"> x
+                        <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+                            <button id="exit_leaderboard" class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRatingWin()"> x
                             </button>
                             <div class="text-center textstroke" style="display: flex;align-items: center;">
-                                <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                                <div class="mb-6 max-[630px]:mt-0">Thank you</div>
                             </div>
                         </div>
                     </div>`
@@ -645,12 +667,11 @@ function clickedStar(event) {
                     document.querySelector("#rating").innerHTML = `
                     <div class="relative flex justify-center items-center z-10"
                     style="width:100vw; height:100vh; background-color: rgba(1,0,0,0.5);">
-                        <div class="relative flex justify-center btn-color p-10" style="width: 35vw; height: 40vh;">
-                            <button id="exit_rating"
-                                class="absolute exit-rating flex justify-center items-center text-center pb-3" onclick="closeRating()"> x
+                        <div class="relative flex justify-center btn-color p-10 rate-frame w-80 max-[630px]:w-60 h-70 max-[630px]:h-48">
+                            <button id="exit_leaderboard" class="absolute exit-leaderboard flex justify-center items-center text-center pb-3 max-[630px]:scale-75" onclick="closeRating()"> x
                             </button>
                             <div class="text-center textstroke" style="display: flex;align-items: center;">
-                                <div style="font-size: calc(3vw + 3vh);">Thank you</div>
+                                <div class="mb-6 max-[630px]:mt-0">Thank you</div>
                             </div>
                         </div>
                     </div>`
@@ -679,15 +700,15 @@ function closeRatingWin() {
     document.querySelector("#rating").innerHTML = ""
     document.querySelector("#winlose").innerHTML = `
     <div class="absolute flex justify-center items-center z-10"
-    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+        style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+        <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 80vh;">
             <div class="relative w-auto h-auto text-center">
-                <div class="textstroke text-size">
+                <div class="textstroke" style="font-size: 8vw;">
                     You<br>
                     <span id="player-winlose">Win</span>
                 </div>
                 <div class="flex justify-center">
-                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                    <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;margin-top: 10vh;" onclick="goBackToMenu()">
                         <span class="textstroke test-text">BACK TO MENU</span>
                     </button>
                 </div>
@@ -700,15 +721,15 @@ function closeRating() {
     document.querySelector("#rating").innerHTML = ""
     document.querySelector("#winlose").innerHTML = `
     <div class="absolute flex justify-center items-center z-10"
-    style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
-        <div class="p-14 flex justify-center items-center btn-color" style="width: 60vw; height: 80vh;">
+        style="width:100vw; height:100%; background-color: rgba(1,0,0,0.5);">
+        <div class="p-14 flex justify-center items-center btn-color" style="max-width: 60vw; min-height: 80vh;">
             <div class="relative w-auto h-auto text-center">
-                <div class="textstroke text-size">
+                <div class="textstroke" style="font-size: 8vw;">
                     You<br>
                     <span id="player-winlose">Lose</span>
                 </div>
                 <div class="flex justify-center">
-                    <button class="btn-height flex justify-center items-center btn-color" style="width: 25vw;" onclick="goBackToMenu()">
+                    <button class="btn-height flex justify-center items-center btn-color" style="max-width: 25vw;margin-top: 10vh;" onclick="goBackToMenu()">
                         <span class="textstroke test-text">BACK TO MENU</span>
                     </button>
                 </div>

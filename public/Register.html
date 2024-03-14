@@ -14,23 +14,32 @@
 </head>
 
 <style>
-    .text-size{
+    .text-size {
         font-size: 35px;
     }
-    .back-btn{
+
+    .back-btn {
         margin-top: 32px;
         margin-left: 32px;
         left: 0;
     }
-    .inp-color{
+
+    .inp-color {
         width: 384px;
         height: 80px;
     }
-    .regis-btn{
+
+    .regis-btn {
         width: 300px;
     }
+
+    .feedback-text-color {
+        color: #EA5455;
+        font-size: 25px;
+    }
+
     @media all and (max-width:992px) {
-        .back-btn{
+        .back-btn {
             left: 0;
             top: -5px;
             scale: 0.6;
@@ -38,30 +47,38 @@
             margin-left: 0px;
         }
 
-        }
+    }
+
     @media all and (max-width:630px) {
-        .back-btn{
+        .back-btn {
             left: -20px;
             top: -20px;
             scale: 0.4;
             margin-top: 0px;
             margin-left: 0px;
         }
-        .inp-color{
+
+        .inp-color {
             width: 300px;
             height: 50px;
             font-size: 20px;
         }
-        .text-size{
+
+        .text-size {
             font-size: 20px;
         }
-        .regis-btn{
+
+        .regis-btn {
             border: 5px solid #EA5455;
             width: 200px;
             height: 50px;
         }
-        }
 
+        .feedback-text-color {
+            color: #EA5455;
+            font-size: 15px;
+        }
+    }
 </style>
 
 <body style="background-color: #2D4059;">
@@ -71,27 +88,31 @@
         <div class="p-14 h-32 flex justify-center mt-16 items-center btn-color">
             <span class="textstroke">PEMDAS TIC TAC TOE</span>
         </div>
-        <button class="absolute w-28 h-28 flex justify-center items-center round-btn back-btn btn-shadow hover:opacity-70"
+        <button
+            class="absolute w-28 h-28 flex justify-center items-center round-btn back-btn btn-shadow hover:opacity-70"
             onclick="location.href = 'index.html'">
             <!-- insert function here -->
 
             <img style="scale: 0.8;"
-                src="https://firebasestorage.googleapis.com/v0/b/pemdas-project.appspot.com/o/icon-Back.png?alt=media&token=48d9fe49-0488-4062-96cc-e4c038df68e8">
+                src="icon-Back.png">
         </button>
     </div>
 
     <!-- input here -->
     <div class="container mx-auto flex justify-center">
         <div>
-            <input id="register_id" class="inp-color mt-12 pl-4 text-size" type="text" placeholder="Username" maxlength="6"><br>
-            <div id="signup-username-feedback" class="invalid-feedback flex items-center p-0 m-0">
+            <input id="register_id" class="inp-color mt-12 pl-4 text-size" type="text" placeholder="Username"
+                maxlength="6"><br>
+            <div id="signup-username-feedback" class="invalid-feedback flex items-center p-0 m-0 feedback-text">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Username is already use</span> -->
             </div>
-            <input id="register_password" class="inp-color mt-4 pl-4 text-size" type="password" placeholder="Password"><br>
-            <input id="register_Cpassword" class="inp-color mt-4 pl-4 text-size" type="password" placeholder="Confirm Password">
+            <input id="register_password" class="inp-color mt-4 pl-4 text-size" type="password"
+                placeholder="Password"><br>
+            <input id="register_Cpassword" class="inp-color mt-4 pl-4 text-size" type="password"
+                placeholder="Confirm Password">
             <!-- feedback -->
-            <div id="confirmpassword-feedback" class="invalid-feedback flex items-center p-0 m-0">
+            <div id="confirmpassword-feedback" class="invalid-feedback flex items-center p-0 m-0 feedback-text">
                 <!-- <img style="scale: 0.8;" src="https://media.discordapp.net/attachments/986985862631915541/1208838842958876672/icon-alert.png?ex=65e4bde7&is=65d248e7&hm=f16af1f41fe2458140aa58e2b0f68f18d262ecf316ef28919a6aef09ae9c00df&=&format=webp&quality=lossless&width=51&height=60">
                 <span class="feedback-text-color">Confirm password is not match</span> -->
             </div>
@@ -105,7 +126,9 @@
     <!-- button here -->
     <div class="container mx-auto justify-center flex">
         <div class="text-center">
-            <button id="Register_btn" class="hover:opacity-70 mt-8 flex justify-center items-center btn-color regis-btn btn-shadow" onclick="signupAccount()">
+            <button id="Register_btn"
+                class="hover:opacity-70 mt-8 flex justify-center items-center btn-color regis-btn btn-shadow"
+                onclick="signupAccount()">
                 <!-- insert function here -->
                 <span class="textstroke text-size">Register</span>
             </button>
